@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class University {
     private String collegeCode;
     private String policyName;
-    private String policydate;
-    private String policyurl;
+    private String policyDate;
+    private String policyUrl;
 }
