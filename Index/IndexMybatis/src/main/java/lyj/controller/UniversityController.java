@@ -1,6 +1,7 @@
 package lyj.controller;
 
 import entities.University;
+import lyj.service.CollegeService;
 import lyj.service.UniversityService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,17 @@ public class UniversityController {
     @Autowired
     private UniversityService universityDao;
 
+    @Autowired
+    private CollegeService collegeDao;
+
     @RequestMapping("/{collegeCode}/{limit}")
     public List<University> getUniversitiesByID(@PathVariable("collegeCode") String collegeCode, @PathVariable("limit") int limit){
+        return universityDao.getUniversitiesByID(collegeCode,limit);
+    }
+
+    @RequestMapping("/name/{collegeName}/{limit}")
+    public List<University> getUniversitiesByCollegeName(@PathVariable("collegeName") String collegeName,@PathVariable("limit") int limit){
+        String collegeCode = collegeDao.getCollegeCodeByCollegeName(collegeName);
         return universityDao.getUniversitiesByID(collegeCode,limit);
     }
 }

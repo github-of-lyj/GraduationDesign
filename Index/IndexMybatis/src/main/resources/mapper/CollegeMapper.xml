@@ -7,4 +7,8 @@
         SELECT * FROM college ORDER BY RAND() LIMIT 1;
     </select>
 
+    <select id="getCollegeCodeByCollegeName" resultType="string">
+        select collegeCode from college where collegeName = #{collegeName}
+    </select>
+
 </mapper>

@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface UniversityMapper {
     List<University> getUniversitiesByID(@Param("collegeCode") String collegeCode,@Param("limit") int limit);
+
+
 }

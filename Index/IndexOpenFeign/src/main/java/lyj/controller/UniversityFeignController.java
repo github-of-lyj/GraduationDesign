@@ -20,4 +20,10 @@ public class UniversityFeignController {
     public List<University> getUniversitiesByID(@PathVariable("collegeCode") String collegeCode, @PathVariable("limit") int limit){
         return indexService.getUniversitiesByID(collegeCode,limit);
     }
+
+    @RequestMapping("/name/{collegeName}/{limit}")
+    public List<University> getUniversitiesByCollegeName(@PathVariable("collegeName") String collegeName,@PathVariable("limit") int limit){
+        String collegeCode = indexService.getCollegeCodeByCollegeName(collegeName);
+        return indexService.getUniversitiesByID(collegeCode,limit);
+    }
 }

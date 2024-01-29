@@ -17,10 +17,20 @@ public interface IndexFeignService {
     @RequestMapping("/college/random")
     College getRandomCollege();
 
-    @RequestMapping("/university/{collegeCode}/{limit}")
-    List<University> getUniversitiesByID(@PathVariable("collegeCode") String collegeCode, @PathVariable("limit") int limit);
+    @RequestMapping("/college/{collegeName}")
+    String getCollegeCodeByCollegeName(@PathVariable("collegeName")String collegeName);
 
     @RequestMapping("/country/{type}/{limit}")
     List<Country> getCountriesByType(@PathVariable("type") String type, @PathVariable("limit") int limit);
+
+    @RequestMapping("/university/{collegeCode}/{limit}")
+    List<University> getUniversitiesByID(@PathVariable("collegeCode") String collegeCode, @PathVariable("limit") int limit);
+
+    @RequestMapping("/university/name/{collegeName}/{limit}")
+    List<University> getUniversitiesByCollegeName(@PathVariable("collegeName") String collegeName,@PathVariable("limit") int limit);
+
+
+
+
 
 }

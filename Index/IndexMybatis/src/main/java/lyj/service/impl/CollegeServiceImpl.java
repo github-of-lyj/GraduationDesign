@@ -15,4 +15,9 @@ public class CollegeServiceImpl implements CollegeService {
     public College getRandomCollege() {
         return CollegeDao.getRandomCollege();
     }
+
+    @Override
+    public String getCollegeCodeByCollegeName(String collegeName) {
+        return CollegeDao.getCollegeCodeByCollegeName(collegeName);
+    }
 }
