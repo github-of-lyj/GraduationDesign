@@ -12,6 +12,7 @@
         <module>DataEntity</module>
         <module>ReceptionGateWay</module>
         <module>Index</module>
+        <module>Information</module>
     </modules>
 
     <properties>
