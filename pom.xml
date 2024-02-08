@@ -13,6 +13,7 @@
         <module>ReceptionGateWay</module>
         <module>Index</module>
         <module>Information</module>
+        <module>User</module>
     </modules>
 
     <properties>
