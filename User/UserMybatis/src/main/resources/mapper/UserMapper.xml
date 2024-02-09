@@ -4,4 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lyj.dao.UserMappper">
 
+    <select id="isExistSameUserName" resultType="integer">
+        select count(*) from user where userName = #{userName}
+
+    </select>
+
+    <select id="isExistSameUserAccount" resultType="integer">
+        select count(*) from user where userAccount = #{userAccount}
+    </select>
+
+    <select id="isExistUserID" resultType="integer">
+        select count(*) from user where userID = ${userID}
+    </select>
+
+    <select id="isExistUser" resultType="entities.User">
+        select * from user
+        where userName = #{userLoginRequest.userName} and userPassword = #{userLoginRequest.userPassword}
+    </select>
+
+    <insert id="createNewUser" useGeneratedKeys="true" keyProperty="userID">
+        insert into user values
+        (null,#{User.userName},${User.userLevel},${User.userAvatar},
+         ${User.userExperience},#{User.userAccount},#{User.userPassword},
+         #{User.authority},${User.isAdministrators})
+    </insert>
+
+
 </mapper>

@@ -8,7 +8,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableRedisHttpSession
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 180)
 public class UserMyBatis {
     public static void main(String[] args) {
         SpringApplication.run(UserMyBatis.class,args);
