@@ -100,6 +100,7 @@ public class UserServiceImpl implements UserService {
         //存储本会话的用户登录信息
         session.setAttribute(ConstantUtil.USER_LOGIN_STATUS,user);
         redisTemplate.opsForValue().set(key,session.getId(),180, TimeUnit.SECONDS);
+        user.setUniqueMark(session.getId());
         return user;
     }
 
@@ -119,7 +120,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void checkUserLoginStatus(User checkUser,HttpServletRequest httpServletRequest) {
+    public void checkUserLoginStatus(User checkUser) {
         //确认当前传入的用户是否是本身存在的用户
         if (userDAO.isExistUserID(checkUser.getUserID()) == 0)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "未知的用户");
@@ -127,15 +128,17 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(ErrorCode.PARAMS_ERROR,"不存在的用户名");
         if (userDAO.isExistSameUserAccount(checkUser.getUserAccount()) == 0)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "不存在的邮箱");
-        HttpSession session = httpServletRequest.getSession();
         String key = checkUser.getUserID() + checkUser.getUserName();
         String sessionID = redisTemplate.opsForValue().get(key);
         //说明当前账号没有用户登录，即用户登录已过期或先前有用户退出了登录
         if (sessionID == null)
             throw new BusinessException(ErrorCode.USER_ERROR,"登录账户已过期");
-        //获取到的 sessionID 不为空，但是当前的会话当中存储的用户登录状态为空
+        //获取到的 sessionID 不为空，但是当前的会话当中存储的用户登录状态为空（即先前获取到的 sessionID 已经不是原本会话的 SessionID)
         //这说明该账号在另一个会话下被登，该会话的登录状态已经被删除
-        if (session.getAttribute(ConstantUtil.USER_LOGIN_STATUS) == null)
+        Object o = redisTemplate.opsForHash().get(
+                ConstantUtil.SPRING_SESSION_PREFIX + checkUser.getUniqueMark(),
+                ConstantUtil.SPRING_SESSION_KEY_PREFIX + ConstantUtil.USER_LOGIN_STATUS);
+        if (o == null)
             throw new BusinessException(ErrorCode.USER_ERROR,"账号异地登录");
     }
 }

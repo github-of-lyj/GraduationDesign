@@ -12,6 +12,6 @@ public interface UserService {
 
     void userLogOut(User user,HttpServletRequest httpServletRequest);
 
-    void checkUserLoginStatus(User user,HttpServletRequest httpServletRequest);
+    void checkUserLoginStatus(User user);
 
 }
