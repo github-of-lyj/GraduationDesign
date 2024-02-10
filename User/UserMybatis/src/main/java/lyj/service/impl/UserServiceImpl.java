@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean checkUserLoginStatus(User checkUser,HttpServletRequest httpServletRequest) {
+    public void checkUserLoginStatus(User checkUser,HttpServletRequest httpServletRequest) {
         //确认当前传入的用户是否是本身存在的用户
         if (userDAO.isExistUserID(checkUser.getUserID()) == 0)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "未知的用户");
@@ -137,8 +137,6 @@ public class UserServiceImpl implements UserService {
         //这说明该账号在另一个会话下被登，该会话的登录状态已经被删除
         if (session.getAttribute(ConstantUtil.USER_LOGIN_STATUS) == null)
             throw new BusinessException(ErrorCode.USER_ERROR,"账号异地登录");
-        else
-            return true;
     }
 }
 

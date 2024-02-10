@@ -1,8 +1,8 @@
 server:
-  port: 7002
+  port: 8002
 spring:
   application:
-    name: user-mybatis
+    name: user-openFeign
   cloud:
     nacos:
       discovery:

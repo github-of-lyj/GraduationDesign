@@ -1,7 +1,6 @@
 package lyj.exception;
 
 import common.BaseResponse;
-import common.ErrorCode;
 import common.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import lyj.exception.BusinessException;

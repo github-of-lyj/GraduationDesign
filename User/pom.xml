@@ -13,6 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>UserMybatis</module>
+        <module>UserGateWay</module>
+        <module>UserOpenFeign</module>
     </modules>
 
     <properties>
