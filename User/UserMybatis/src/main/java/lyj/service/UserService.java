@@ -10,8 +10,8 @@ public interface UserService {
 
     User userLogin(userLoginRequest userLogin, HttpServletRequest request);
 
-    void userLogOut(User user);
+    void userLogOut(User user,HttpServletRequest httpServletRequest);
 
-    Boolean checkUserLoginStatus(User user);
+    Boolean checkUserLoginStatus(User user,HttpServletRequest httpServletRequest);
 
 }

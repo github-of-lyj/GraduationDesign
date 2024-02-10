@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.time.Duration;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -85,32 +86,59 @@ public class UserServiceImpl implements UserService {
         if (user == null)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         user.setUserPassword("");
+        String key = user.getUserID() + user.getUserName();
+        //获取到当前会话以及当前会话ID
         HttpSession session = request.getSession();
-        session.setAttribute(user.getUserID() + user.getUserName(),user);
-        redisTemplate.opsForValue().set(user.getUserID() + user.getUserName(),session.getId(),180, TimeUnit.SECONDS);
+        String sessionID = redisTemplate.opsForValue().get(key);
+        //若获取到的 sessionID不为空，说明先前已经有用户登录了
+        //根据获取到的 sessionID，将先前登录用户的登录状态删除
+        if (sessionID != null)
+            redisTemplate.opsForHash().delete(
+                    ConstantUtil.SPRING_SESSION_PREFIX + sessionID,
+                    ConstantUtil.SPRING_SESSION_KEY_PREFIX + ConstantUtil.USER_LOGIN_STATUS
+                    );
+        //存储本会话的用户登录信息
+        session.setAttribute(ConstantUtil.USER_LOGIN_STATUS,user);
+        redisTemplate.opsForValue().set(key,session.getId(),180, TimeUnit.SECONDS);
         return user;
     }
 
     @Override
-    public void userLogOut(User user) {
+    public void userLogOut(User user,HttpServletRequest httpServletRequest) {
+        //获取当前用户的会话信息
+        HttpSession session = httpServletRequest.getSession();
+        //获取相应的 key 并得到 sessionID
         String key = user.getUserID() + user.getUserName();
         String sessionID = redisTemplate.opsForValue().get(key);
+        //sessionID为空，表明用户实际并未登录，是非法操作
         if (sessionID == null)
-            return;
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户未登录");
+        //删除在 redis 中对于相应 sessionID 的存储，移除相应 session 中存放的用户登录状态
         redisTemplate.delete(key);
-        redisTemplate.opsForHash().delete(ConstantUtil.SPRING_SESSION_PREFIX + sessionID
-                ,ConstantUtil.SPRING_SESSION_KEY_PREFIX + key);
+        session.removeAttribute(ConstantUtil.USER_LOGIN_STATUS);
     }
 
     @Override
-    public Boolean checkUserLoginStatus(User checkUser) {
-        int userID = checkUser.getUserID();
-        int result = userDAO.isExistUserID(userID);
-        if (result == 0)
+    public Boolean checkUserLoginStatus(User checkUser,HttpServletRequest httpServletRequest) {
+        //确认当前传入的用户是否是本身存在的用户
+        if (userDAO.isExistUserID(checkUser.getUserID()) == 0)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "未知的用户");
+        if (userDAO.isExistSameUserName(checkUser.getUserName()) == 0)
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"不存在的用户名");
+        if (userDAO.isExistSameUserAccount(checkUser.getUserAccount()) == 0)
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "不存在的邮箱");
+        HttpSession session = httpServletRequest.getSession();
         String key = checkUser.getUserID() + checkUser.getUserName();
         String sessionID = redisTemplate.opsForValue().get(key);
-        Object o = redisTemplate.opsForHash().get(ConstantUtil.SPRING_SESSION_PREFIX + sessionID, ConstantUtil.SPRING_SESSION_KEY_PREFIX + key);
-        return sessionID != null & o != null;
+        //说明当前账号没有用户登录，即用户登录已过期或先前有用户退出了登录
+        if (sessionID == null)
+            throw new BusinessException(ErrorCode.USER_ERROR,"登录账户已过期");
+        //获取到的 sessionID 不为空，但是当前的会话当中存储的用户登录状态为空
+        //这说明该账号在另一个会话下被登，该会话的登录状态已经被删除
+        if (session.getAttribute(ConstantUtil.USER_LOGIN_STATUS) == null)
+            throw new BusinessException(ErrorCode.USER_ERROR,"账号异地登录");
+        else
+            return true;
     }
 }
+

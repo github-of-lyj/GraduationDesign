@@ -33,13 +33,13 @@ public class UserController {
     }
 
     @PostMapping("/checkLogin")
-    public Boolean checkLogin(@RequestBody User userData){
-        return userService.checkUserLoginStatus(userData);
+    public Boolean checkLogin(@RequestBody User userData,HttpServletRequest httpServletRequest){
+        return userService.checkUserLoginStatus(userData,httpServletRequest);
     }
 
     @PostMapping("/logout")
-    public void userLogout(@RequestBody User userData){
-        userService.userLogOut(userData);
+    public void userLogout(@RequestBody User userData,HttpServletRequest httpServletRequest){
+        userService.userLogOut(userData,httpServletRequest);
     }
 
 }
