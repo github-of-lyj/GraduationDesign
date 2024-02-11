@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setUserPassword(userPassword);
         user.setAuthority("1,2");
         user.setAdministrators(false);
+        user.setUserDescription("这个人很懒，什么都没有留下");
         return user;
     }
 

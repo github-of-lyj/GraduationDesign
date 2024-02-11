@@ -14,6 +14,7 @@
         <module>Index</module>
         <module>Information</module>
         <module>User</module>
+        <module>File</module>
     </modules>
 
     <properties>

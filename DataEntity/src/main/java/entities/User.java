@@ -23,7 +23,8 @@ public class User {
     //账号权限以及是否是管理人员
     private String authority;
     private boolean isAdministrators;
-
+    //用户简介
+    private String userDescription;
     //账号登录时的唯一标识
     private String uniqueMark;
 }

@@ -1,0 +1,22 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: file-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #服务注册中心地址
+        username: nacos
+        password: nacos
+        group: FILE_GROUP
+        namespace: df328a25-9feb-487a-9e6a-c1319a629d00
+      config:
+        server-addr: localhost:8848 #配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        username: nacos
+        password: nacos
+        group: FILE_GROUP
+        namespace: df328a25-9feb-487a-9e6a-c1319a629d00
+  profiles:
+    active: dev

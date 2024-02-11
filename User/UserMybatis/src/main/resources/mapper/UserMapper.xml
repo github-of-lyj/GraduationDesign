@@ -26,7 +26,7 @@
         insert into user values
         (null,#{User.userName},${User.userLevel},${User.userAvatar},
          ${User.userExperience},#{User.userAccount},#{User.userPassword},
-         #{User.authority},${User.isAdministrators})
+         #{User.authority},${User.isAdministrators},#{User.userDescription})
     </insert>
 
 
