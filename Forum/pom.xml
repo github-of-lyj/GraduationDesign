@@ -9,7 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Information</artifactId>
+    <artifactId>Forum</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ForumMybatis</module>
+        <module>ForumOpenFeign</module>
+        <module>ForumGateWay</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

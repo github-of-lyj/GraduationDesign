@@ -12,9 +12,9 @@
         <module>DataEntity</module>
         <module>ReceptionGateWay</module>
         <module>Index</module>
-        <module>Information</module>
         <module>User</module>
         <module>File</module>
+        <module>Forum</module>
     </modules>
 
     <properties>
