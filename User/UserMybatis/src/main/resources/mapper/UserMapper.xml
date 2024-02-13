@@ -29,5 +29,13 @@
          #{User.authority},${User.isAdministrators},#{User.userDescription})
     </insert>
 
+    <update id="updateUserName">
+        update user set userName = #{userName} where userID = ${userID}
+    </update>
+
+    <update id="updateUserDescription">
+        update user set userDescription = #{userDescription} where userID = ${userID}
+    </update>
+
 
 </mapper>

@@ -8,17 +8,13 @@ import entities.request.User.userRegisterRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lyj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
-
 
     @PostMapping("/register")
     public BaseResponse<Integer> userRegister(@RequestBody userRegisterRequest userRegisterInfo){
@@ -40,6 +36,16 @@ public class UserController {
     @PostMapping("/logout")
     public void userLogout(@RequestBody User userData,HttpServletRequest httpServletRequest){
         userService.userLogOut(userData,httpServletRequest);
+    }
+
+    @PostMapping("/updateUserName/{userName}/{userID}")
+    public void updateUserName(@PathVariable(value = "userName") String userName,@PathVariable(value = "userID") int userID) {
+        userService.updateUserName(userName,userID);
+    }
+
+    @PostMapping("/updateUserDescription/{userDescription}/{userID}")
+    public void updateUserDescription(@PathVariable(value = "userDescription") String userDescription,@PathVariable(value = "userID") int userID) {
+        userService.updateUserDescription(userDescription,userID);
     }
 
 }

@@ -16,4 +16,8 @@ public interface UserMappper {
     User isExistUser(@Param("userLoginRequest")userLoginRequest userLoginRequest);
 
     int createNewUser(@Param("User")User user);
+
+    void updateUserName(@Param("userName")String userName,@Param("userID")int userID);
+
+    void updateUserDescription(@Param("userDescription")String userDescription,@Param("userID")int userID);
 }

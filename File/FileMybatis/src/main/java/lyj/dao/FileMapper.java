@@ -8,4 +8,6 @@ import org.apache.ibatis.annotations.Param;
 public interface FileMapper {
     MyFile getFilePath(@Param("fileID") String fileID);
 
+    int uploadUserAvatar(@Param("userAvatar")MyFile userAvatar);
+
 }

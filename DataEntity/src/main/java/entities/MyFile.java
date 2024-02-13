@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyFile {
-    private String fileID;
-    private String userID;
+    private int fileID;
+    private int userID;
     private String fileName;
     private String filePath;
 }

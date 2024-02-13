@@ -6,4 +6,8 @@
     <select id="getFilePath" resultType="entities.MyFile">
         select * from file where fileID = ${fileID}
     </select>
+
+    <insert id="uploadUserAvatar" useGeneratedKeys="true" keyProperty="fileID">
+        insert into file values(null,${userAvatar.userID},#{userAvatar.fileName},#{userAvatar.filePath})
+    </insert>
 </mapper>
