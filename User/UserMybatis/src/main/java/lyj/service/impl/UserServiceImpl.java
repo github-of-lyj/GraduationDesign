@@ -146,11 +146,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserName(String userName, int userID) {
+        //从数据库中查看是否存在重复的用户名，若存在，抛出异常
+        if (userDAO.isExistSameUserName(userName) > 0)
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户名重复");
         userDAO.updateUserName(userName,userID);
     }
 
     @Override
     public void updateUserDescription(String userDescription, int userID) {
+        System.out.println(userDescription);
         userDAO.updateUserDescription(userDescription,userID);
     }
 
