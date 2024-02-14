@@ -20,4 +20,6 @@ public interface UserMappper {
     void updateUserName(@Param("userName")String userName,@Param("userID")int userID);
 
     void updateUserDescription(@Param("userDescription")String userDescription,@Param("userID")int userID);
+
+    void updateUserAvatar(@Param("userID")int userID,@Param("fileID")int fileID);
 }

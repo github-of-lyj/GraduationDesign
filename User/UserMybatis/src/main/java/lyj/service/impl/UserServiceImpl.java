@@ -153,5 +153,10 @@ public class UserServiceImpl implements UserService {
     public void updateUserDescription(String userDescription, int userID) {
         userDAO.updateUserDescription(userDescription,userID);
     }
+
+    @Override
+    public void updateUserAvatar(int userID, int fileID) {
+        userDAO.updateUserAvatar(userID,fileID);
+    }
 }
 

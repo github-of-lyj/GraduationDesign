@@ -83,6 +83,7 @@ public class FileServiceImpl implements FileService {
             MyFile myFile = new MyFile();
             myFile.setFileName(fileName);
             myFile.setFilePath(imgUrl);
+            myFile.setUserID(userID);
             fileDao.uploadUserAvatar(myFile);
             System.out.println(myFile.getFileID());
             return myFile.getFileID();

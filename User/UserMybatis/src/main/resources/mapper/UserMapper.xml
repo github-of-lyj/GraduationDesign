@@ -37,5 +37,9 @@
         update user set userDescription = #{userDescription} where userID = ${userID}
     </update>
 
+    <update id="updateUserAvatar">
+        update user set userAvatar = ${fileID} where userID = ${userID}
+    </update>
+
 
 </mapper>

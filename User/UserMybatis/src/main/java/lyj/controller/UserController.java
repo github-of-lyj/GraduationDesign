@@ -7,6 +7,7 @@ import entities.request.User.userLoginRequest;
 import entities.request.User.userRegisterRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lyj.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,11 @@ public class UserController {
     @PostMapping("/updateUserDescription/{userDescription}/{userID}")
     public void updateUserDescription(@PathVariable(value = "userDescription") String userDescription,@PathVariable(value = "userID") int userID) {
         userService.updateUserDescription(userDescription,userID);
+    }
+
+    @PostMapping("/updateUserAvatar/{userID}/{fileID}")
+    void updateUserAvatar(@PathVariable("userID")int userID, @PathVariable("fileID")int fileID){
+        userService.updateUserAvatar(userID,fileID);
     }
 
 }

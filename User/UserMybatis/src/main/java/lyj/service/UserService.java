@@ -19,4 +19,6 @@ public interface UserService {
 
     void updateUserDescription(String userDescription,int userID);
 
+    void updateUserAvatar(int userID,int fileID);
+
 }
