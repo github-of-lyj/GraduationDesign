@@ -4,7 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lyj.dao.PostMapper">
     <select id="selectPostsByBlockID" resultType="entities.Post">
-        select * from post where blockID = ${blockID}
+        SELECT postID,userName,blockName,replyNumber,postTitle,postDate FROM post
+        JOIN USER ON post.`userID` = user.`userID`
+        JOIN block ON post.`blockID` = block.`blockID`
+        where post.`blockID` = ${blockID}
+    </select>
+
+    <select id="selectPostByPostID" resultType="entities.Post">
+        SELECT postID,userName,blockName,replyNumber,postTitle,postDate FROM post
+        JOIN USER ON post.`userID` = user.`userID`
+        JOIN block ON post.`blockID` = block.`blockID`
+        WHERE post.`postID` = ${postID}
+
+    </select>
+
+    <select id="selectPostNumberByUserName" resultType="integer">
+        SELECT COUNT(*) FROM post
+        WHERE userID =  (SELECT userID FROM user WHERE userName = #{userName})
     </select>
 
 </mapper>

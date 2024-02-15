@@ -4,15 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lyj.dao.PostReplyMapper">
     <select id="getEarliestPostReplyFromPost" resultType="entities.PostReply">
-        select * from postreply where postID = ${postID} order by postReplyTime limit 1
+        SELECT postReplyID,userName,postTitle,postReplyContent,postReplyTime FROM postreply
+        JOIN USER ON postreply.`userID` = user.`userID`
+        JOIN post ON postreply.`postID` = post.`postID`
+        WHERE postreply.`postID` = ${postID}
+        ORDER BY postReplyTime
+        LIMIT 1
     </select>
 
     <select id="getLatestPostReplyFromPost" resultType="entities.PostReply">
-        select * from postreply where postID = ${postID} order by postReplyTime desc limit 1
+        SELECT postReplyID,userName,postTitle,postReplyContent,postReplyTime FROM postreply
+        JOIN USER ON postreply.`userID` = user.`userID`
+        JOIN post ON postreply.`postID` = post.`postID`
+        WHERE postreply.`postID` = ${postID}
+        ORDER BY postReplyTime desc
+        LIMIT 1
     </select>
 
     <select id="getAllReplyFromPost" resultType="entities.PostReply">
-        select * from postreply where postID = ${postID} order by postReplyTime
+        SELECT postReplyID,userName,postTitle,postReplyContent,postReplyTime FROM postreply
+        JOIN USER ON postreply.`userID` = user.`userID`
+        JOIN post ON postreply.`postID` = post.`postID`
+        WHERE postreply.`postID` = ${postID}
+        ORDER BY postReplyTime
     </select>
 
 </mapper>

@@ -1,7 +1,6 @@
 package lyj.controller;
 
 import entities.Post;
-import lyj.dao.PostMapper;
 import lyj.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,4 +20,17 @@ public class postController {
     public List<Post> selectPostsByBlockID(@PathVariable("blockID") int blockID){
         return postDAO.selectPostsByBlockID(blockID);
     }
+
+    @GetMapping("/getPost/{postID}")
+    public Post selectPostByPostID(@PathVariable("postID") int postID){
+        return postDAO.selectPostByPostID(postID);
+    }
+
+    @GetMapping("/getUserPostNumber/{userName}")
+    public int selectPostNumberByUserName(@PathVariable("userName") String userName){
+        return postDAO.selectPostNumberByUserName(userName);
+    }
+
+
+
 }

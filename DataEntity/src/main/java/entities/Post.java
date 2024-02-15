@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Post {
     private int postID;
-    private int userID;
-    private int blockID;
+    private String userName;
+    private String blockName;
     private int replyNumber;
     private String postTitle;
     private String postDate;

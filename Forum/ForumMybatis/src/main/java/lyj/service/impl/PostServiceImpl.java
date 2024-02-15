@@ -17,4 +17,14 @@ public class PostServiceImpl implements PostService {
     public List<Post> selectPostsByBlockID(int blockID) {
         return postDAO.selectPostsByBlockID(blockID);
     }
+
+    @Override
+    public Post selectPostByPostID(int postID) {
+        return postDAO.selectPostByPostID(postID);
+    }
+
+    @Override
+    public int selectPostNumberByUserName(String userName) {
+        return postDAO.selectPostNumberByUserName(userName);
+    }
 }

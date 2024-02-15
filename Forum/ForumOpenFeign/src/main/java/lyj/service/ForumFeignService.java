@@ -22,6 +22,12 @@ public interface ForumFeignService {
     @GetMapping("/post/getPosts/{blockID}")
     List<Post> selectPostsByBlockID(@PathVariable("blockID") int blockID);
 
+    @GetMapping("/post/getPost/{postID}")
+    Post selectPostByPostID(@PathVariable("postID") int postID);
+
+    @GetMapping("/post/getUserPostNumber/{userName}")
+    public int selectPostNumberByUserName(@PathVariable("userName") String userName);
+
     @GetMapping("/postReply/getEarliestPostReplyFromPost/{postID}")
     PostReply getEarliestPostReplyFromPost(@PathVariable("postID") int postID);
 

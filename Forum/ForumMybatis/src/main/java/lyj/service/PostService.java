@@ -8,5 +8,7 @@ import java.util.List;
 public interface PostService {
     List<Post> selectPostsByBlockID(int blockID);
 
+    Post selectPostByPostID(int postID);
 
+    int selectPostNumberByUserName(String userName);
 }
