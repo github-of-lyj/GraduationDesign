@@ -145,6 +145,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getUserNameByUserID(int userID) {
+        return userDAO.getUserNameByUserID(userID);
+    }
+
+    @Override
     public void updateUserName(String userName, int userID) {
         //从数据库中查看是否存在重复的用户名，若存在，抛出异常
         if (userDAO.isExistSameUserName(userName) > 0)

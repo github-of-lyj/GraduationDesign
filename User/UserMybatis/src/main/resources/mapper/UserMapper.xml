@@ -29,6 +29,10 @@
          #{User.authority},${User.isAdministrators},#{User.userDescription})
     </insert>
 
+    <select id="getUserNameByUserID" resultType="string">
+        select userName from user where userID = ${userID}
+    </select>
+
     <update id="updateUserName">
         update user set userName = #{userName} where userID = ${userID}
     </update>

@@ -15,6 +15,8 @@ public interface UserService {
 
     void checkUserLoginStatus(User user);
 
+    String getUserNameByUserID(int userID);
+
     void updateUserName(String userName, int userID);
 
     void updateUserDescription(String userDescription,int userID);

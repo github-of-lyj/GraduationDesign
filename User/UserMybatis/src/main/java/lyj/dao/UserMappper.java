@@ -17,6 +17,8 @@ public interface UserMappper {
 
     int createNewUser(@Param("User")User user);
 
+    String getUserNameByUserID(@Param("userID")int userID);
+
     void updateUserName(@Param("userName")String userName,@Param("userID")int userID);
 
     void updateUserDescription(@Param("userDescription")String userDescription,@Param("userID")int userID);

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lyj.dao.PostReplyMapper">
+    <select id="getEarliestPostReplyFromPost" resultType="entities.PostReply">
+        select * from postreply where postID = ${postID} order by postReplyTime limit 1
+    </select>
+
+    <select id="getLatestPostReplyFromPost" resultType="entities.PostReply">
+        select * from postreply where postID = ${postID} order by postReplyTime desc limit 1
+    </select>
+
+    <select id="getAllReplyFromPost" resultType="entities.PostReply">
+        select * from postreply where postID = ${postID} order by postReplyTime
+    </select>
+
+</mapper>

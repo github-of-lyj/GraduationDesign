@@ -39,6 +39,11 @@ public class UserController {
         userService.userLogOut(userData,httpServletRequest);
     }
 
+    @GetMapping("/getUserName/{userID}")
+    String getUserNameByUserID(@PathVariable("userID") int userID){
+        return userService.getUserNameByUserID(userID);
+    }
+
     @PostMapping("/updateUserName/{userName}/{userID}")
     public void updateUserName(@PathVariable(value = "userName") String userName,@PathVariable(value = "userID") int userID) {
         userService.updateUserName(userName,userID);
