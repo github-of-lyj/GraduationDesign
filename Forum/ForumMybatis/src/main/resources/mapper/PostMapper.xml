@@ -18,9 +18,16 @@
 
     </select>
 
+
+
     <select id="selectPostNumberByUserName" resultType="integer">
         SELECT COUNT(*) FROM post
         WHERE userID =  (SELECT userID FROM user WHERE userName = #{userName})
     </select>
+
+    <insert id="insertNewPost" useGeneratedKeys="true" keyProperty="postID">
+        insert into post
+        values(null,${post.userID},${post.blockID},${post.replyNumber},#{post.postTitle},#{post.postDate})
+    </insert>
 
 </mapper>

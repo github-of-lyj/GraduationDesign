@@ -11,4 +11,6 @@ public interface PostReplyService {
     PostReply getLatestPostReplyFromPost(int postID);
 
     List<PostReply> getAllReplyFromPost(int postID);
+
+    int insertNewPostReply(PostReply postReply);
 }

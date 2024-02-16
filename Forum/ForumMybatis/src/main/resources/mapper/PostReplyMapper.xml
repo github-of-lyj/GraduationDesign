@@ -29,4 +29,13 @@
         ORDER BY postReplyTime
     </select>
 
+    <insert id="insertNewPostReply" useGeneratedKeys="true" keyProperty="postReplyID">
+        insert into postreply
+        values(null,${postReply.userID},${postReply.postID},#{postReply.postReplyContent},#{postReply.postReplyTime})
+    </insert>
+
+    <update id="addPostReplyNumber">
+        UPDATE post SET replyNumber = replyNumber + 1 WHERE postID = ${postID}
+    </update>
+
 </mapper>

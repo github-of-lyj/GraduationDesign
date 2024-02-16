@@ -3,10 +3,7 @@ package lyj.controller;
 import entities.PostReply;
 import jakarta.annotation.Resource;
 import lyj.service.ForumFeignService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,10 @@ public class PostReplyController {
     @GetMapping("/getAllReplyFromPost/{postID}")
     List<PostReply> getAllReplyFromPost(@PathVariable("postID") int postID){
         return forumService.getAllReplyFromPost(postID);
+    }
+
+    @PostMapping("/insertNewPostReply")
+    int insertNewPostReply(@RequestBody PostReply publishData){
+        return forumService.insertNewPostReply(publishData);
     }
 }

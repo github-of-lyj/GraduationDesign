@@ -44,6 +44,13 @@ public class UserController {
         return userService.getUserNameByUserID(userID);
     }
 
+    @GetMapping("/getUser/{userName}")
+    User getUserByUserName(@PathVariable("userName")String userName){
+        User user = userService.getUserByUserName(userName);
+        user.setUserPassword("");
+        return user;
+    }
+
     @PostMapping("/updateUserName/{userName}/{userID}")
     public void updateUserName(@PathVariable(value = "userName") String userName,@PathVariable(value = "userID") int userID) {
         userService.updateUserName(userName,userID);

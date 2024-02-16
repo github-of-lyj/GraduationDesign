@@ -11,4 +11,6 @@ public interface PostService {
     Post selectPostByPostID(int postID);
 
     int selectPostNumberByUserName(String userName);
+
+    int insertNewPost(Post post);
 }

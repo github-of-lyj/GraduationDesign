@@ -13,4 +13,6 @@ public interface PostMapper {
     Post selectPostByPostID(@Param("postID")int postID);
 
     int selectPostNumberByUserName(@Param("userName")String userName);
+
+    int insertNewPost(@Param("post")Post post);
 }

@@ -1,5 +1,6 @@
 package lyj.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import entities.Post;
 import lyj.dao.PostMapper;
 import lyj.service.PostService;
@@ -26,5 +27,14 @@ public class PostServiceImpl implements PostService {
     @Override
     public int selectPostNumberByUserName(String userName) {
         return postDAO.selectPostNumberByUserName(userName);
+    }
+
+    @Override
+    public int insertNewPost(Post post) {
+        String postDate = String.valueOf(DateUtil.date());
+        post.setReplyNumber(-1);
+        post.setPostDate(postDate);
+        postDAO.insertNewPost(post);
+        return post.getPostID();
     }
 }

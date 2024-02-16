@@ -1,5 +1,6 @@
 package lyj.dao;
 
+import entities.Post;
 import entities.PostReply;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,4 +14,8 @@ public interface PostReplyMapper {
     PostReply getLatestPostReplyFromPost(@Param("postID")int postID);
 
     List<PostReply> getAllReplyFromPost(@Param("postID")int postID);
+
+    int insertNewPostReply(@Param("postReply") PostReply postReply);
+
+    void addPostReplyNumber(@Param("postID")int postID);
 }

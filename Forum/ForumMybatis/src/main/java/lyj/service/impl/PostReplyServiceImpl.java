@@ -1,5 +1,7 @@
 package lyj.service.impl;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import entities.PostReply;
 import lyj.dao.PostReplyMapper;
 import lyj.service.PostReplyService;
@@ -26,5 +28,14 @@ public class PostReplyServiceImpl implements PostReplyService {
     @Override
     public List<PostReply> getAllReplyFromPost(int postID) {
         return PostReplyDAO.getAllReplyFromPost(postID);
+    }
+
+    @Override
+    public int insertNewPostReply(PostReply postReply) {
+        String postReplyTime = String.valueOf(DateUtil.date());
+        postReply.setPostReplyTime(postReplyTime);
+        PostReplyDAO.insertNewPostReply(postReply);
+        PostReplyDAO.addPostReplyNumber(postReply.getPostID());
+        return postReply.getPostReplyID();
     }
 }

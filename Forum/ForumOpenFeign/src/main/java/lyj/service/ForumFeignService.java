@@ -7,6 +7,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -26,7 +28,10 @@ public interface ForumFeignService {
     Post selectPostByPostID(@PathVariable("postID") int postID);
 
     @GetMapping("/post/getUserPostNumber/{userName}")
-    public int selectPostNumberByUserName(@PathVariable("userName") String userName);
+    int selectPostNumberByUserName(@PathVariable("userName") String userName);
+
+    @PostMapping("/post/insertNewPost")
+    int insertNewPost(@RequestBody Post post);
 
     @GetMapping("/postReply/getEarliestPostReplyFromPost/{postID}")
     PostReply getEarliestPostReplyFromPost(@PathVariable("postID") int postID);
@@ -36,4 +41,7 @@ public interface ForumFeignService {
 
     @GetMapping("/postReply/getAllReplyFromPost/{postID}")
     List<PostReply> getAllReplyFromPost(@PathVariable("postID") int postID);
+
+    @PostMapping("/postReply/insertNewPostReply")
+    int insertNewPostReply(@RequestBody PostReply postReply);
 }

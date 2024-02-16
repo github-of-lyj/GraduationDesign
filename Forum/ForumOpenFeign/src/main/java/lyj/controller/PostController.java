@@ -3,10 +3,7 @@ package lyj.controller;
 import entities.Post;
 import jakarta.annotation.Resource;
 import lyj.service.ForumFeignService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +26,10 @@ public class PostController {
     @GetMapping("/getUserPostNumber/{userName}")
     public int selectPostNumberByUserName(@PathVariable("userName") String userName){
         return forumService.selectPostNumberByUserName(userName);
+    }
+
+    @PostMapping("/insertNewPost")
+    int insertNewPost(@RequestBody Post publishData){
+        return forumService.insertNewPost(publishData);
     }
 }
