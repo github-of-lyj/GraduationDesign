@@ -3,6 +3,7 @@ package lyj.service;
 import entities.Block;
 import entities.Post;
 import entities.PostReply;
+import entities.UserReply;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,4 +45,14 @@ public interface ForumFeignService {
 
     @PostMapping("/postReply/insertNewPostReply")
     int insertNewPostReply(@RequestBody PostReply postReply);
+
+
+    @GetMapping("/userReply/selectUserReplyCount/{postReplyID}")
+    int selectUserReplyCount(@PathVariable("postReplyID") int postReplyID);
+
+    @GetMapping("/userReply/selectAllUserReply/{postReplyID}")
+    public List<UserReply> selectAllUserReply(@PathVariable("postReplyID")int postReplyID);
+
+    @PostMapping("/userReply/insertNewUserReply")
+    public int insertNewUserReply(@RequestBody UserReply userReply);
 }

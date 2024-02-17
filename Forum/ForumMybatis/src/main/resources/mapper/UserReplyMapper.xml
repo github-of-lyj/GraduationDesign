@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lyj.dao.UserReplyMapper">
+    <select id="selectUserReplyCount" resultType="integer">
+        select count(*) from userReply
+        where postReplyID = ${postReplyID}
+    </select>
+
+    <select id="selectAllUserReply" resultType="entities.UserReply">
+        SELECT userReplyID,userreply.`userID`,userName,userReplyContent,userReplyTime
+        FROM userreply JOIN user ON userreply.`userID` = user.`userID`
+        WHERE userreply.`postReplyID` = ${postReplyID}
+    </select>
+
+    <insert id="insertNewUserReply" useGeneratedKeys="true" keyProperty="userReplyID">
+        insert into userreply
+        values(null,${userReply.userID},${userReply.postID},${userReply.postReplyID},#{userReply.userReplyContent},#{userReply.userReplyTime})
+    </insert>
+
+</mapper>
