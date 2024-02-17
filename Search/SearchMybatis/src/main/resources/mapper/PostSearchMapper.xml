@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lyj.dao.PostSearchMapper">
+    <select id="selectVaguePost" resultType="entities.PostSearch">
+        SELECT block.`blockID`,blockName,post.`postID`,postTitle,user.`userID`,userName, postReplyContent, postDate
+        FROM post
+        JOIN postreply ON post.`postID` = postreply.`postID`
+        JOIN block ON post.`blockID` = block.`blockID`
+        JOIN USER ON post.`userID` = user.`userID`
+        WHERE postTitle LIKE '%${searchField}%'
+        AND postreply.postReplyTime = (
+            SELECT MIN(postReplyTime)
+            FROM postreply
+            WHERE post.`postID` = postreply.`postID`
+        )
+    </select>
+
+</mapper>

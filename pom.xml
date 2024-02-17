@@ -15,6 +15,7 @@
         <module>User</module>
         <module>File</module>
         <module>Forum</module>
+        <module>Search</module>
     </modules>
 
     <properties>
