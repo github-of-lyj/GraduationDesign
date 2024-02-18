@@ -17,4 +17,9 @@ public class PostReplySearchServiceImpl implements PostReplySearchService {
     public List<PostReplySearch> selectVaguePostReply(String searchField) {
         return postReplySearchDAO.selectVaguePostReply(searchField);
     }
+
+    @Override
+    public List<PostReplySearch> selectPostReply(int userID) {
+        return postReplySearchDAO.selectPostReply(userID);
+    }
 }

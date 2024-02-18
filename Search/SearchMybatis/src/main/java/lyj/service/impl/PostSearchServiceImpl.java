@@ -17,4 +17,9 @@ public class PostSearchServiceImpl implements PostSearchService {
     public List<PostSearch> selectVaguePost(String postTitle) {
         return postSearchDAO.selectVaguePost(postTitle);
     }
+
+    @Override
+    public List<PostSearch> selectUserPost(int userID) {
+        return postSearchDAO.selectUserPost(userID);
+    }
 }

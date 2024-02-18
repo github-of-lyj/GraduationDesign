@@ -10,4 +10,6 @@ import java.util.List;
 @Mapper
 public interface PostReplySearchMapper {
     List<PostReplySearch> selectVaguePostReply(@Param("searchField")String searchField);
+
+    List<PostReplySearch> selectPostReply(@Param("userID")int userID);
 }

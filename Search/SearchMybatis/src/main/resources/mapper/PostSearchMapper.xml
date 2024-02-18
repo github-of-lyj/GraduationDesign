@@ -17,4 +17,18 @@
         )
     </select>
 
+    <select id="selectUserPost" resultType="entities.PostSearch">
+        SELECT post.`postID`,postTitle, postReplyContent,replyNumber, postDate
+        FROM post
+        JOIN postreply ON post.`postID` = postreply.`postID`
+        JOIN block ON post.`blockID` = block.`blockID`
+        JOIN USER ON post.`userID` = user.`userID`
+        WHERE post.`userID` = ${userID}
+        AND postreply.postReplyTime = (
+            SELECT MIN(postReplyTime)
+            FROM postreply
+            WHERE post.`postID` = postreply.`postID`
+        )
+    </select>
+
 </mapper>

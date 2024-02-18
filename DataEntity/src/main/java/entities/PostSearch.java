@@ -17,7 +17,8 @@ public class PostSearch {
     //用户ID以及用户姓名
     private int userID;
     private String userName;
-    //帖子主题以及帖子发布日期
+    //帖子主题 帖子回复数以及帖子发布日期
     private String postReplyContent;
+    private int replyNumber;
     private String postDate;
 }

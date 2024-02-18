@@ -20,4 +20,9 @@ public class PostReplySearchController {
     public List<PostReplySearch> selectVaguePostReply(@PathVariable("searchField") String searchField){
         return searchService.selectVaguePostReply(searchField);
     }
+
+    @GetMapping("/selectPostReply/{userID}")
+    public List<PostReplySearch> selectPostReply(@PathVariable("userID")int userID){
+        return searchService.selectPostReply(userID);
+    }
 }
