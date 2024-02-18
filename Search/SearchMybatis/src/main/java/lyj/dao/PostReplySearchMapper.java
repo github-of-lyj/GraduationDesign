@@ -11,5 +11,7 @@ import java.util.List;
 public interface PostReplySearchMapper {
     List<PostReplySearch> selectVaguePostReply(@Param("searchField")String searchField);
 
+    List<PostReplySearch> selectHotPostReply();
+
     List<PostReplySearch> selectPostReply(@Param("userID")int userID);
 }

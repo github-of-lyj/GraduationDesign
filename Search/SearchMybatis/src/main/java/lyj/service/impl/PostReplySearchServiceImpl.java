@@ -19,6 +19,11 @@ public class PostReplySearchServiceImpl implements PostReplySearchService {
     }
 
     @Override
+    public List<PostReplySearch> selectHotPostReply() {
+        return postReplySearchDAO.selectHotPostReply();
+    }
+
+    @Override
     public List<PostReplySearch> selectPostReply(int userID) {
         return postReplySearchDAO.selectPostReply(userID);
     }

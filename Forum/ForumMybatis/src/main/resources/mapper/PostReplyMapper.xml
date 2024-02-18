@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lyj.dao.PostReplyMapper">
     <select id="getEarliestPostReplyFromPost" resultType="entities.PostReply">
-        SELECT postReplyID,userName,postTitle,postReplyContent,postReplyTime FROM postreply
+        SELECT postReplyID,postreply.`userID`,userName,postTitle,postReplyContent,postReplyTime FROM postreply
         JOIN USER ON postreply.`userID` = user.`userID`
         JOIN post ON postreply.`postID` = post.`postID`
         WHERE postreply.`postID` = ${postID}
@@ -13,7 +13,7 @@
     </select>
 
     <select id="getLatestPostReplyFromPost" resultType="entities.PostReply">
-        SELECT postReplyID,userName,postTitle,postReplyContent,postReplyTime FROM postreply
+        SELECT postReplyID,postreply.`userID`,userName,postTitle,postReplyContent,postReplyTime FROM postreply
         JOIN USER ON postreply.`userID` = user.`userID`
         JOIN post ON postreply.`postID` = post.`postID`
         WHERE postreply.`postID` = ${postID}

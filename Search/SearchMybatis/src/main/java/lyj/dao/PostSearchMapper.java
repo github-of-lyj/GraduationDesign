@@ -12,5 +12,7 @@ import java.util.List;
 public interface PostSearchMapper {
     List<PostSearch> selectVaguePost(@Param("searchField")String searchField);
 
+    List<PostSearch> selectHotPost();
+
     List<PostSearch> selectUserPost(@Param("userID")int userID);
 }

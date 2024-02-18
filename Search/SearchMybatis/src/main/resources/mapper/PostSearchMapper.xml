@@ -17,6 +17,21 @@
         )
     </select>
 
+    <select id="selectHotPost" resultType="entities.PostSearch">
+        SELECT block.`blockID`,blockName,post.`postID`,postTitle,user.`userID`,userName, postReplyContent,replyNumber,postDate
+        FROM post
+        JOIN postreply ON post.`postID` = postreply.`postID`
+        JOIN block ON post.`blockID` = block.`blockID`
+        JOIN USER ON post.`userID` = user.`userID`
+        AND postreply.postReplyTime = (
+            SELECT MIN(postReplyTime)
+            FROM postreply
+            WHERE post.`postID` = postreply.`postID`
+        )
+        ORDER BY replyNumber DESC
+        LIMIT 3
+    </select>
+
     <select id="selectUserPost" resultType="entities.PostSearch">
         SELECT post.`postID`,postTitle, postReplyContent,replyNumber, postDate
         FROM post

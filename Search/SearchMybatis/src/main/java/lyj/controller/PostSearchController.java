@@ -21,6 +21,11 @@ public class PostSearchController {
         return postSearchDAO.selectVaguePost(searchField);
     }
 
+    @GetMapping("/selectHotPost")
+    public List<PostSearch> selectHotPost(){
+        return postSearchDAO.selectHotPost();
+    }
+
     @GetMapping("/selectUserPost/{userID}")
     public List<PostSearch> selectUserPost(@PathVariable("userID")int userID){
         return postSearchDAO.selectUserPost(userID);

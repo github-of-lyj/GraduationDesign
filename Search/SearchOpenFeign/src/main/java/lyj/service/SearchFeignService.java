@@ -16,11 +16,17 @@ public interface SearchFeignService {
     @GetMapping("/PostSearch/getPost/{searchField}")
     List<PostSearch> selectVaguePost(@PathVariable("searchField") String searchField);
 
+    @GetMapping("/PostSearch/selectHotPost")
+    List<PostSearch> selectHotPost();
+
     @GetMapping("/PostSearch/selectUserPost/{userID}")
     List<PostSearch> selectUserPost(@PathVariable("userID")int userID);
 
     @GetMapping("/PostReplySearch/getPostReply/{searchField}")
     List<PostReplySearch> selectVaguePostReply(@PathVariable("searchField") String searchField);
+
+    @GetMapping("/PostReplySearch/selectHotPostReply")
+    List<PostReplySearch> selectHotPostReply();
 
     @GetMapping("/PostReplySearch/selectPostReply/{userID}")
     List<PostReplySearch> selectPostReply(@PathVariable("userID")int userID);

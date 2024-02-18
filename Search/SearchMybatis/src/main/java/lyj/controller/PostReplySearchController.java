@@ -25,4 +25,9 @@ public class PostReplySearchController {
     public List<PostReplySearch> selectPostReply(@PathVariable("userID")int userID){
         return postReplySearchDAO.selectPostReply(userID);
     }
+
+    @GetMapping("/selectHotPostReply")
+    public List<PostReplySearch> selectHotPostReply(){
+        return postReplySearchDAO.selectHotPostReply();
+    }
 }

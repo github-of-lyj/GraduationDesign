@@ -8,5 +8,7 @@ import java.util.List;
 public interface PostSearchService {
     List<PostSearch> selectVaguePost(String postTitle);
 
+    List<PostSearch> selectHotPost();
+
     List<PostSearch> selectUserPost(int userID);
 }

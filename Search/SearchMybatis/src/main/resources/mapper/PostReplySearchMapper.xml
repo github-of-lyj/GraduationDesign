@@ -12,6 +12,16 @@
         WHERE postReplyContent LIKE '%${searchField}%'
     </select>
 
+    <select id="selectHotPostReply" resultType="entities.PostReplySearch">
+        SELECT post.`postID`,post.`postTitle`,postReplyID,postReplyContent,user.`userID`,user.`userName`,postReplyTime
+        FROM postreply
+        JOIN post ON postreply.`postID` = post.`postID`
+        JOIN block ON block.`blockID` = post.`blockID`
+        JOIN USER ON postreply.`userID` = user.`userID`
+        ORDER BY postReplyTime DESC
+        LIMIT 5
+    </select>
+
     <select id="selectPostReply" resultType="entities.PostReplySearch">
         SELECT post.`postID`,post.`postTitle`,postReplyID,postReplyContent,postReplyTime
         FROM postreply
