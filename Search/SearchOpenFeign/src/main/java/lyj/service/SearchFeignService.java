@@ -2,6 +2,7 @@ package lyj.service;
 
 import entities.PostReplySearch;
 import entities.PostSearch;
+import entities.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,4 +19,9 @@ public interface SearchFeignService {
     @GetMapping("/PostReplySearch/getPostReply/{searchField}")
     List<PostReplySearch> selectVaguePostReply(@PathVariable("searchField") String searchField);
 
+    @GetMapping("/UserSearch/getUser/{searchField}")
+    List<User> selectVagueUser(@PathVariable("searchField") String searchField);
+
+    @GetMapping("/UserSearch/selectUser/{userID}")
+    User selectUser(@PathVariable("userID") int userID);
 }
