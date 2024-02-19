@@ -24,4 +24,6 @@ public class FileFeignController {
     public int uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("userID")int userID){
         return fileFeignService.uploadUserAvatar(file,userID);
     }
+
+
 }

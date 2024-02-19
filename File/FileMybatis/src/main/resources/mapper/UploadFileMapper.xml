@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lyj.dao.UploadFileMapper">
+    <insert id="uploadFile" useGeneratedKeys="true" keyProperty="uploadfileID">
+        insert into uploadfile values(null,${uploadfile.userID},#{uploadfile.uploadfileName},
+                                #{uploadfile.uploadfilePath},#{uploadfile.uploadfileSize},${uploadfile.downloadCounts},
+                                #{uploadfile.uploadDate})
+    </insert>
+
+    <select id="selectAllUploadFile" resultType="entities.UploadFile">
+        SELECT uploadfileID,uploadfileName,uploadfilePath,uploadfileSize,downloadCounts,uploadfile.`userID`,userName,uploadDate
+        FROM uploadfile
+        JOIN USER ON uploadfile.`userID` = user.`userID`
+    </select>
+</mapper>

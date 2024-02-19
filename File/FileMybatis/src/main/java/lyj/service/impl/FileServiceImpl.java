@@ -26,7 +26,7 @@ public class FileServiceImpl implements FileService {
     FileMapper fileDao;
 
     private static final String imagePrefix = "/imgs";
-    private static final String zipPrefix = "/zips";
+
 
     @Override
     public ResponseEntity<Resource> getUserAvatar(String fileID) throws IOException {
