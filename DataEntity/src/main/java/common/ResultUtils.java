@@ -47,6 +47,6 @@ public class ResultUtils {
      * @param errorCode 错误代码
      */
     public static BaseResponse error(ErrorCode errorCode, String description) {
-        return new BaseResponse(errorCode.getCode(), errorCode.getMessage(), description);
+        return new BaseResponse(errorCode.getCode(), "",errorCode.getMessage(), description);
     }
 }

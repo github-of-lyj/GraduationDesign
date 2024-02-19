@@ -10,7 +10,7 @@ public enum ErrorCode {
     SUCCESS(0, "ok", ""),
     PARAMS_ERROR(601, "请求参数错误", ""),
     USER_ERROR(602, "用户状态异常", ""),
-    NOT_LOGIN(603, "未登录", ""),
+    TEXT_VIOLATION(603, "用户文本属性内容违规", ""),
     NO_AUTH(604, "无权限", "");
 
     //状态码

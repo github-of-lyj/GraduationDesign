@@ -24,7 +24,7 @@ public class UserReplyController {
     }
 
     @PostMapping("/insertNewUserReply")
-    public int insertNewUserReply(@RequestBody UserReply userReply){
+    public Object insertNewUserReply(@RequestBody UserReply userReply){
         return forumService.insertNewUserReply(userReply);
     }
 }

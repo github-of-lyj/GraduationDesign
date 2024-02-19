@@ -29,7 +29,7 @@ public class PostController {
     }
 
     @PostMapping("/insertNewPost")
-    int insertNewPost(@RequestBody Post publishData){
+    Object insertNewPost(@RequestBody Post publishData){
         return forumService.insertNewPost(publishData);
     }
 }

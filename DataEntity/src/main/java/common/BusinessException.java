@@ -1,11 +1,5 @@
-package lyj.exception;
+package common;
 
-import common.ErrorCode;
-
-/**
- * 自定义异常类
- *
- */
 public class BusinessException extends RuntimeException {
 
     /**
@@ -45,3 +39,4 @@ public class BusinessException extends RuntimeException {
         return description;
     }
 }
+

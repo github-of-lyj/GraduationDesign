@@ -29,7 +29,7 @@ public class PostReplyController {
     }
 
     @PostMapping("/insertNewPostReply")
-    int insertNewPostReply(@RequestBody PostReply publishData){
+    Object insertNewPostReply(@RequestBody PostReply publishData){
         return forumService.insertNewPostReply(publishData);
     }
 }

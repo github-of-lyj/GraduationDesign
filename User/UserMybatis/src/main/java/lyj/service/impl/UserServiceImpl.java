@@ -1,5 +1,7 @@
 package lyj.service.impl;
 
+import common.BaseResponse;
+import common.BusinessException;
 import common.ConstantUtil;
 import common.ErrorCode;
 import entities.User;
@@ -7,17 +9,14 @@ import entities.request.User.userLoginRequest;
 import entities.request.User.userRegisterRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lyj.MyTextCheck;
 import lyj.dao.UserMappper;
-import lyj.exception.BusinessException;
 import lyj.service.MailService;
 import lyj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-
-import java.time.Duration;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -69,6 +68,15 @@ public class UserServiceImpl implements UserService {
         //检查是否存在已经注册过的邮箱，若存在，抛出异常
         if (userDAO.isExistSameUserAccount(userAccount) > 0)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "邮箱已注册");
+        //检查用户名是否违规
+        //检查修改用户名是否违规
+        BaseResponse baseResponse = MyTextCheck.checkText(userName);
+        if (baseResponse.getCode() != 0){
+            if (baseResponse.getCode() == 601)
+                throw new BusinessException(ErrorCode.PARAMS_ERROR,baseResponse.getDescription());
+            if (baseResponse.getCode() == 603)
+                throw new BusinessException(ErrorCode.TEXT_VIOLATION,"用户名称违规，违规类型:" + baseResponse.getDescription());
+        }
         //检验通过，将用户的密码加盐用 md5 加密后存储到数据库当中
         String encryption_userPassword = DigestUtils.md5DigestAsHex((SALT + userPassword).getBytes());
         userRegister.setUserPassword(encryption_userPassword);
@@ -159,12 +167,27 @@ public class UserServiceImpl implements UserService {
         //从数据库中查看是否存在重复的用户名，若存在，抛出异常
         if (userDAO.isExistSameUserName(userName) > 0)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户名重复");
+        //检查修改用户名是否违规
+        BaseResponse baseResponse = MyTextCheck.checkText(userName);
+        if (baseResponse.getCode() != 0){
+            if (baseResponse.getCode() == 601)
+                throw new BusinessException(ErrorCode.PARAMS_ERROR,baseResponse.getDescription());
+            if (baseResponse.getCode() == 603)
+                throw new BusinessException(ErrorCode.TEXT_VIOLATION,"用户名称违规，违规类型:" + baseResponse.getDescription());
+        }
         userDAO.updateUserName(userName,userID);
     }
 
     @Override
     public void updateUserDescription(String userDescription, int userID) {
-        System.out.println(userDescription);
+        //检查用户修改后的用户简介是否违规
+        BaseResponse baseResponse = MyTextCheck.checkText(userDescription);
+        if (baseResponse.getCode() != 0){
+            if (baseResponse.getCode() == 601)
+                throw new BusinessException(ErrorCode.PARAMS_ERROR,baseResponse.getDescription());
+            if (baseResponse.getCode() == 603)
+                throw new BusinessException(ErrorCode.TEXT_VIOLATION,"用户简介违规，违规类型:" + baseResponse.getDescription());
+        }
         userDAO.updateUserDescription(userDescription,userID);
     }
 

@@ -16,6 +16,7 @@
         <module>File</module>
         <module>Forum</module>
         <module>Search</module>
+        <module>TextModeration</module>
     </modules>
 
     <properties>

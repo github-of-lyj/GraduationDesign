@@ -32,7 +32,7 @@ public interface ForumFeignService {
     int selectPostNumberByUserName(@PathVariable("userName") String userName);
 
     @PostMapping("/post/insertNewPost")
-    int insertNewPost(@RequestBody Post post);
+    Object insertNewPost(@RequestBody Post post);
 
     @GetMapping("/postReply/getEarliestPostReplyFromPost/{postID}")
     PostReply getEarliestPostReplyFromPost(@PathVariable("postID") int postID);
@@ -44,15 +44,15 @@ public interface ForumFeignService {
     List<PostReply> getAllReplyFromPost(@PathVariable("postID") int postID);
 
     @PostMapping("/postReply/insertNewPostReply")
-    int insertNewPostReply(@RequestBody PostReply postReply);
+    Object insertNewPostReply(@RequestBody PostReply postReply);
 
 
     @GetMapping("/userReply/selectUserReplyCount/{postReplyID}")
     int selectUserReplyCount(@PathVariable("postReplyID") int postReplyID);
 
     @GetMapping("/userReply/selectAllUserReply/{postReplyID}")
-    public List<UserReply> selectAllUserReply(@PathVariable("postReplyID")int postReplyID);
+    List<UserReply> selectAllUserReply(@PathVariable("postReplyID")int postReplyID);
 
     @PostMapping("/userReply/insertNewUserReply")
-    public int insertNewUserReply(@RequestBody UserReply userReply);
+    Object insertNewUserReply(@RequestBody UserReply userReply);
 }
