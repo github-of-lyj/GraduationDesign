@@ -31,23 +31,4 @@ public class FileController {
         return fileService.uploadUserAvatar(file,userID);
     }
 
-    @GetMapping("/files/{fileName}")
-    public ResponseEntity<Resource> getFile(@PathVariable String fileName) throws IOException {
-        File file = new File("D://FILES/imgs/initial/" + fileName); // 修改为你文件的实际路径
-        FileSystemResource resource = new FileSystemResource(file);
-
-        if (!resource.exists()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(resource);
-    }
-
-
 }

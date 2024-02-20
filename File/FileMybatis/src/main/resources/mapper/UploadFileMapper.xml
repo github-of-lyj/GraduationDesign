@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="lyj.dao.UploadFileMapper">
+<mapper namespace="lyj.dao.UploadFileSearchMapper">
     <insert id="uploadFile" useGeneratedKeys="true" keyProperty="uploadfileID">
         insert into uploadfile values(null,${uploadfile.userID},#{uploadfile.uploadfileName},
                                 #{uploadfile.uploadfilePath},#{uploadfile.uploadfileSize},${uploadfile.downloadCounts},
@@ -14,4 +14,8 @@
         FROM uploadfile
         JOIN USER ON uploadfile.`userID` = user.`userID`
     </select>
+
+    <update id="addDownloadCount">
+        UPDATE uploadfile SET downloadCounts = downloadCounts + 1 WHERE uploadfileID = ${uploadfileID}
+    </update>
 </mapper>

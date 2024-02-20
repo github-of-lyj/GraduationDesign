@@ -2,11 +2,13 @@ package lyj.service;
 
 import entities.PostReplySearch;
 import entities.PostSearch;
+import entities.UploadFile;
 import entities.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -37,4 +39,6 @@ public interface SearchFeignService {
     @GetMapping("/UserSearch/selectUser/{userID}")
     User selectUser(@PathVariable("userID") int userID);
 
+    @RequestMapping("/UploadFileSearch/selectVagueUploadFile/{searchField}")
+    List<UploadFile> selectVagueUploadFile(@PathVariable("searchField") String searchField);
 }

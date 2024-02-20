@@ -16,7 +16,7 @@ import java.util.List;
 @FeignClient(value = "file-mybatis")
 public interface FileFeignService {
     @GetMapping("/file/getUserAvatar/{fileID}")
-    public ResponseEntity<Resource> getUserAvatar(@PathVariable("fileID") String fileID) throws IOException;
+    ResponseEntity<Resource> getUserAvatar(@PathVariable("fileID") String fileID) throws IOException;
 
     @PostMapping(value = "/file/uploadUserAvatar",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     int uploadUserAvatar(@RequestPart("file") MultipartFile file,@RequestParam("userID")int userID);
@@ -26,5 +26,8 @@ public interface FileFeignService {
 
     @PostMapping(value = "/uploadfile/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     int uploadFile(@RequestPart("file") MultipartFile file, @RequestParam("userID")int userID);
+
+    @PostMapping("/uploadfile/getFile")
+    ResponseEntity<Resource> getFile(@RequestBody UploadFile uploadFile) throws IOException;
 
 }

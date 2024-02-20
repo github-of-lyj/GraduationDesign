@@ -3,16 +3,22 @@ package lyj.service.impl;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import common.ConstantUtil;
-import entities.MyFile;
 import entities.UploadFile;
 import lyj.dao.UploadFileMapper;
 import lyj.service.UploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -67,5 +73,32 @@ public class UploadFileServiceImpl implements UploadFileService {
             e.printStackTrace();
             return -1;
         }
+    }
+
+    @Override
+    public ResponseEntity<Resource> getFile(UploadFile uploadFile) throws IOException {
+        String uploadFilePath = uploadFile.getUploadfilePath();
+        String uploadFileName = uploadFile.getUploadfileName();
+
+        // 对文件名进行URL编码
+        String encodedFileName = URLEncoder.encode(uploadFileName, StandardCharsets.UTF_8);
+
+        File file = new File(ConstantUtil.FILE_PREFIX + zipPrefix + uploadFilePath + '/' + uploadFileName);
+        FileSystemResource resource = new FileSystemResource(file);
+
+        if (!resource.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        uploadFileDAO.addDownloadCount(uploadFile.getUploadfileID());
+        HttpHeaders headers = new HttpHeaders();
+
+        // 使用URL编码后的文件名
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFileName + "\"");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 }
