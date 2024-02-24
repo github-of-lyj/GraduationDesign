@@ -18,6 +18,7 @@ public class UserReply {
     private String postTitle;
     //回复的回复贴ID
     private int postReplyID;
+    private String postReplyContent;
     //回复内容以及回复时间
     private String userReplyContent;
     private String userReplyTime;

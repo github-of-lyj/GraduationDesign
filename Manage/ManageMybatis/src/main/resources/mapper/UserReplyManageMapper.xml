@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lyj.dao.UserReplyManageMapper">
+    <select id="selectUserReply" resultType="entities.UserReply">
+        SELECT userReplyID,userReplyContent,userreply.`postReplyID`,postReplyContent,userName,userReplyTime
+        FROM userreply
+                 JOIN postreply ON userreply.`postReplyID` = postreply.`postReplyID`
+                 JOIN USER ON userreply.`userID` = user.`userID`
+        <if test="searchField != 'all'">
+            where userReplyContent like '%${searchField}%'
+        </if>
+        ORDER BY userReplyTime
+    </select>
+</mapper>

@@ -1,0 +1,22 @@
+server:
+  port: 8006
+spring:
+  application:
+    name: manage-openFeign
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #服务注册中心地址
+        username: nacos
+        password: nacos
+        namespace: 22da3ef2-ab3f-4225-b997-38ef728831eb
+        group: MANAGE_GROUP
+      config:
+        server-addr: localhost:8848 #配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        username: nacos
+        password: nacos
+        namespace: 22da3ef2-ab3f-4225-b997-38ef728831eb
+        group: MANAGE_GROUP
+  profiles:
+    active: dev

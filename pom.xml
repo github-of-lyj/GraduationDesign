@@ -17,6 +17,7 @@
         <module>Forum</module>
         <module>Search</module>
         <module>TextModeration</module>
+        <module>Manage</module>
     </modules>
 
     <properties>
