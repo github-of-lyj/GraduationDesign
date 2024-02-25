@@ -1,14 +1,9 @@
 package lyj.service;
 
-import entities.Post;
-import entities.PostReply;
-import entities.User;
-import entities.UserReply;
+import entities.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +22,10 @@ public interface ManageFeignService {
 
     @GetMapping("/UserReplyManage/selectUserReply/{searchField}")
     List<UserReply> selectUserReply(@PathVariable("searchField") String searchField);
+
+    @PostMapping("/Report/insertNewReport")
+    int insertNewReport(@RequestBody Report reportData);
+
+    @GetMapping("/Report/selectReport/{searchField}")
+    List<Report> selectReport(@PathVariable("searchField") String searchField);
 }
