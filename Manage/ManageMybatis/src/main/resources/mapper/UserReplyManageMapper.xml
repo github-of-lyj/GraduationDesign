@@ -13,4 +13,8 @@
         </if>
         ORDER BY userReplyTime
     </select>
+
+    <delete id="deleteUserReply">
+        delete from userreply where userReplyID = ${userReplyID}
+    </delete>
 </mapper>

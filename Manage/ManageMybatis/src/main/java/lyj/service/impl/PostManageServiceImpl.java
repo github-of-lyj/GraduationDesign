@@ -17,4 +17,9 @@ public class PostManageServiceImpl implements PostManageService {
     public List<Post> selectPost(String searchField) {
         return postManageDAO.selectPost(searchField);
     }
+
+    @Override
+    public void deletePost(int postID) {
+        postManageDAO.deletePost(postID);
+    }
 }

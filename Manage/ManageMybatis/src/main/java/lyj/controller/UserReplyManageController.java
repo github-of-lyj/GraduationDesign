@@ -3,10 +3,7 @@ package lyj.controller;
 import entities.UserReply;
 import lyj.service.UserReplyManageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +16,10 @@ public class UserReplyManageController {
     @GetMapping("/selectUserReply/{searchField}")
     public List<UserReply> selectUserReply(@PathVariable("searchField") String searchField){
         return userReplyManageService.selectUserReply(searchField);
+    }
+
+    @PostMapping("/deleteUserReply/{userReplyID}")
+    public void deleteUserReply(@PathVariable("userReplyID")int userReplyID){
+        userReplyManageService.deleteUserReply(userReplyID);
     }
 }

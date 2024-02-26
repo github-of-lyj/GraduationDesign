@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         user.setUserExperience(0);
         user.setUserAccount(userAccount);
         user.setUserPassword(userPassword);
-        user.setAuthority("1,2");
+        user.setAuthority("123");
         user.setAdministrators(false);
         user.setUserDescription("这个人很懒，什么都没有留下");
         return user;
@@ -94,6 +94,9 @@ public class UserServiceImpl implements UserService {
         User user = userDAO.isExistUser(userLogin);
         if (user == null)
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
+        String authority = userDAO.getUserAuthorityByUserID(user.getUserID());
+        if (authority.indexOf('1') == -1)
+            throw new BusinessException(ErrorCode.NO_AUTH,"你小子被封号了");
         user.setUserPassword("");
         String key = user.getUserID() + user.getUserName();
         //获取到当前会话以及当前会话ID

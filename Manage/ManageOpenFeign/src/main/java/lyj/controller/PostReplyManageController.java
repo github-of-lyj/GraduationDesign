@@ -3,10 +3,7 @@ package lyj.controller;
 import entities.PostReply;
 import jakarta.annotation.Resource;
 import lyj.service.ManageFeignService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +14,12 @@ public class PostReplyManageController {
     ManageFeignService manageFeignService;
 
     @GetMapping("/selectPostReply/{searchField}")
-    List<PostReply> selectPostReply(@PathVariable("searchField") String searchField){
+    public List<PostReply> selectPostReply(@PathVariable("searchField") String searchField){
         return manageFeignService.selectPostReply(searchField);
+    }
+
+    @PostMapping("/deletePostReply/{postReplyID}")
+    public void deletePostReply(@PathVariable("postReplyID") int postReplyID){
+        manageFeignService.deletePostReply(postReplyID);
     }
 }

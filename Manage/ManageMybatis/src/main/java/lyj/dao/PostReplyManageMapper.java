@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface PostReplyManageMapper {
     List<PostReply> selectPostReply(@Param("searchField")String searchField);
+
+    void deletePostReply(@Param("postReplyID")int postReplyID);
 }

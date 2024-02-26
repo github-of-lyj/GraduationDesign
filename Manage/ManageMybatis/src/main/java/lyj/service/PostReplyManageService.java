@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PostReplyManageService {
     List<PostReply> selectPostReply(String searchField);
+
+    void deletePostReply(int postReplyID);
 }

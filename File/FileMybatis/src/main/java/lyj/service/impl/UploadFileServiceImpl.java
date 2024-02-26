@@ -79,7 +79,6 @@ public class UploadFileServiceImpl implements UploadFileService {
     public ResponseEntity<Resource> getFile(UploadFile uploadFile) throws IOException {
         String uploadFilePath = uploadFile.getUploadfilePath();
         String uploadFileName = uploadFile.getUploadfileName();
-
         // 对文件名进行URL编码
         String encodedFileName = URLEncoder.encode(uploadFileName, StandardCharsets.UTF_8);
 

@@ -35,11 +35,7 @@ public class UploadFileController {
 
     @PostMapping("/getFile")
     public ResponseEntity<Resource> getFile(@RequestBody UploadFile uploadFile) throws IOException{
-        System.out.println(uploadFile);
         return uploadFileService.getFile(uploadFile);
     }
-
-
-
 
 }

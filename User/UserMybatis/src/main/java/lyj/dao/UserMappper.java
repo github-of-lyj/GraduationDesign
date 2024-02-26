@@ -19,6 +19,8 @@ public interface UserMappper {
 
     String getUserNameByUserID(@Param("userID")int userID);
 
+    String getUserAuthorityByUserID(@Param("userID")int userID);
+
     User getUserByUserName(@Param("userName")String userName);
 
     void updateUserName(@Param("userName")String userName,@Param("userID")int userID);

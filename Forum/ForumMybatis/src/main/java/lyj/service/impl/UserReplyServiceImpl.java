@@ -6,6 +6,7 @@ import common.BusinessException;
 import common.ErrorCode;
 import entities.UserReply;
 import lyj.MyTextCheck;
+import lyj.dao.AuthorityMapper;
 import lyj.dao.PostReplyMapper;
 import lyj.dao.UserReplyMapper;
 import lyj.service.UserReplyService;
@@ -22,6 +23,9 @@ public class UserReplyServiceImpl implements UserReplyService {
     @Autowired
     PostReplyMapper PostReplyDAO;
 
+    @Autowired
+    AuthorityMapper authorityDAO;
+
     @Override
     public int selectUserReplyCount(int postReplyID) {
         return UserReplyDAO.selectUserReplyCount(postReplyID);
@@ -34,6 +38,9 @@ public class UserReplyServiceImpl implements UserReplyService {
 
     @Override
     public int insertNewUserReply(UserReply userReply) {
+        String authority = authorityDAO.selectUserAuthorityByUserID(userReply.getUserID());
+        if (authority.indexOf('2') == -1)
+            throw new BusinessException(ErrorCode.NO_AUTH,"你小子被禁言了");
         //文本检测
         BaseResponse baseResponse = MyTextCheck.checkText(userReply.getUserReplyContent());
         if (baseResponse.getCode() != 0){

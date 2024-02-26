@@ -9,4 +9,9 @@
         where userName like '%${searchField}%'
         </if>
     </select>
+
+    <update id="modifyUserAuthority">
+        update user set authority = #{authority}
+        where userID = ${userID}
+    </update>
 </mapper>

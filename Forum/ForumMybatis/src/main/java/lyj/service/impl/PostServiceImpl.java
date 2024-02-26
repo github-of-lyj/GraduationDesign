@@ -6,6 +6,7 @@ import common.BusinessException;
 import common.ErrorCode;
 import entities.Post;
 import lyj.MyTextCheck;
+import lyj.dao.AuthorityMapper;
 import lyj.dao.PostMapper;
 import lyj.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     @Autowired
     PostMapper postDAO;
+
+    @Autowired
+    AuthorityMapper authorityDAO;
 
     @Override
     public List<Post> selectPostsByBlockID(int blockID) {
@@ -35,6 +39,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public int insertNewPost(Post post) {
+        String authority = authorityDAO.selectUserAuthorityByUserID(post.getUserID());
+        if (authority.indexOf('2') == -1)
+            throw new BusinessException(ErrorCode.NO_AUTH,"你小子被禁言了");
         //文本检测
         BaseResponse baseResponse = MyTextCheck.checkText(post.getPostTitle());
         if (baseResponse.getCode() != 0){

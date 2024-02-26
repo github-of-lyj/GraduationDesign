@@ -17,4 +17,9 @@ public class PostReplyManageServiceImpl implements PostReplyManageService {
     public List<PostReply> selectPostReply(String searchField) {
         return postReplyManageDAO.selectPostReply(searchField);
     }
+
+    @Override
+    public void deletePostReply(int postReplyID) {
+        postReplyManageDAO.deletePostReply(postReplyID);
+    }
 }

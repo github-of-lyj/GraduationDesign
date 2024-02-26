@@ -17,4 +17,9 @@ public class UserReplyManageServiceImpl implements UserReplyManageService {
     public List<UserReply> selectUserReply(String searchField) {
         return userReplyManageDAO.selectUserReply(searchField);
     }
+
+    @Override
+    public void deleteUserReply(int userReplyID) {
+        userReplyManageDAO.deleteUserReply(userReplyID);
+    }
 }

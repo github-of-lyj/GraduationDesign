@@ -14,4 +14,5 @@ public interface UploadFileMapper {
     int uploadFile(@Param("uploadfile") UploadFile uploadfile);
 
     void addDownloadCount(@Param("uploadfileID")int uploadfileID);
+
 }

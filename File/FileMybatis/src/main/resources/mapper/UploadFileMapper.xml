@@ -18,4 +18,5 @@
     <update id="addDownloadCount">
         UPDATE uploadfile SET downloadCounts = downloadCounts + 1 WHERE uploadfileID = ${uploadfileID}
     </update>
+
 </mapper>

@@ -17,4 +17,9 @@ public class UserManageServiceImpl implements UserManageService {
     public List<User> selectUser(String searchField) {
         return userManageDAO.selectUser(searchField);
     }
+
+    @Override
+    public void modifyUserAuthority(int userID, String authority) {
+        userManageDAO.modifyUserAuthority(userID,authority);
+    }
 }

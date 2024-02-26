@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface PostManageMapper {
     List<Post> selectPost(@Param("searchField")String searchField);
+
+    void deletePost(@Param("postID")int postID);
 }

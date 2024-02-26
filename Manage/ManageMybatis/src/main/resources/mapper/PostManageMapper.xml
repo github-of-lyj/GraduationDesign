@@ -4,10 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lyj.dao.PostManageMapper">
     <select id="selectPost" resultType="entities.Post">
-        SELECT postID,postTitle,replyNumber,userName,postDate FROM
-        post JOIN USER ON post.`userID` = user.`userID`
+        SELECT postID,postTitle,blockName,replyNumber,userName,postDate FROM post
+        JOIN USER ON post.`userID` = user.`userID`
+        JOIN block ON post.`blockID` = block.`blockID`
         <if test="searchField != 'all'">
             where postTitle like '%${searchField}%'
         </if>
     </select>
+
+    <delete id="deletePost">
+        delete from userreply where postID = ${postID};
+        delete from postreply where postID = ${postID};
+        delete from post where postID = ${postID};
+    </delete>
 </mapper>

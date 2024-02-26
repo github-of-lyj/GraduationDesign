@@ -7,6 +7,7 @@ import common.BusinessException;
 import common.ErrorCode;
 import entities.PostReply;
 import lyj.MyTextCheck;
+import lyj.dao.AuthorityMapper;
 import lyj.dao.PostReplyMapper;
 import lyj.service.PostReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import java.util.List;
 public class PostReplyServiceImpl implements PostReplyService {
     @Autowired
     PostReplyMapper PostReplyDAO;
+
+    @Autowired
+    AuthorityMapper authorityDAO;
 
     @Override
     public PostReply getEarliestPostReplyFromPost(int postID) {
@@ -36,6 +40,9 @@ public class PostReplyServiceImpl implements PostReplyService {
 
     @Override
     public int insertNewPostReply(PostReply postReply) {
+        String authority = authorityDAO.selectUserAuthorityByUserID(postReply.getUserID());
+        if (authority.indexOf('2') == -1)
+            throw new BusinessException(ErrorCode.NO_AUTH,"你小子被禁言了");
         //文本检测
         BaseResponse baseResponse = MyTextCheck.checkText(postReply.getPostReplyContent());
         if (baseResponse.getCode() != 0){

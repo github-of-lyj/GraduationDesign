@@ -4,6 +4,7 @@ import entities.User;
 import lyj.service.UserManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,10 @@ public class UserManageController {
     @RequestMapping("/selectUser/{searchField}")
     public List<User> selectUser(@PathVariable("searchField") String searchField){
         return userManageService.selectUser(searchField);
+    }
+
+    @PostMapping("/modifyUserAuthority/{userID}/{authority}")
+    public void modifyUserAuthority(@PathVariable("userID") int userID,@PathVariable("authority") String authority){
+        userManageService.modifyUserAuthority(userID,authority);
     }
 }

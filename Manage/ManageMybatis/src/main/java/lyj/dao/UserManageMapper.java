@@ -10,5 +10,5 @@ import java.util.List;
 public interface UserManageMapper {
     List<User> selectUser(@Param("searchField")String searchField);
 
-
+    void modifyUserAuthority(@Param("userID")int userID,@Param("authority") String authority);
 }

@@ -3,10 +3,7 @@ package lyj.controller;
 import entities.UserReply;
 import jakarta.annotation.Resource;
 import lyj.service.ManageFeignService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +16,10 @@ public class UserReplyManageController {
     @GetMapping("/selectUserReply/{searchField}")
     List<UserReply> selectUserReply(@PathVariable("searchField") String searchField){
         return manageFeignService.selectUserReply(searchField);
+    }
+
+    @PostMapping("/deleteUserReply/{userReplyID}")
+    void deleteUserReply(@PathVariable("userReplyID")int userReplyID){
+        manageFeignService.deleteUserReply(userReplyID);
     }
 }

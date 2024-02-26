@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface UserReplyManageMapper {
     List<UserReply> selectUserReply(@Param("searchField")String searchField);
+
+    void deleteUserReply(@Param("userReplyID")int userReplyID);
 }
