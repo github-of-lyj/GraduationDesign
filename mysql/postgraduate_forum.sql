@@ -46,11 +46,11 @@ CREATE TABLE `file` (
   PRIMARY KEY (`fileID`),
   KEY `FK_upload_and_download` (`userID`),
   CONSTRAINT `FK_upload_and_download` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `file` */
 
-insert  into `file`(`fileID`,`userID`,`fileName`,`filePath`) values (1,NULL,'initialAvatar.jpg','/initial'),(4,1,'1707876561.jpg','/2024/1/14/10'),(5,1,'1707876976.jpg','/2024/1/14/10'),(6,1,'1707877198.jpg','/2024/1/14/10'),(7,1,'1707887785.jpg','/2024/1/14/13'),(8,1,'1707887856.jpg','/2024/1/14/13'),(9,2,'1707910559.jpg','/2024/1/14/19'),(10,2,'1707911487.jpg','/2024/1/14/19'),(11,2,'1707912439.jpg','/2024/1/14/20'),(12,2,'1707912509.jpg','/2024/1/14/20'),(13,NULL,'logo.jpg','/initial');
+insert  into `file`(`fileID`,`userID`,`fileName`,`filePath`) values (1,NULL,'initialAvatar.jpg','/initial'),(4,1,'1707876561.jpg','/2024/1/14/10'),(5,1,'1707876976.jpg','/2024/1/14/10'),(6,1,'1707877198.jpg','/2024/1/14/10'),(7,1,'1707887785.jpg','/2024/1/14/13'),(8,1,'1707887856.jpg','/2024/1/14/13'),(9,2,'1707910559.jpg','/2024/1/14/19'),(10,2,'1707911487.jpg','/2024/1/14/19'),(11,2,'1707912439.jpg','/2024/1/14/20'),(12,2,'1707912509.jpg','/2024/1/14/20'),(13,NULL,'logo.jpg','/initial'),(14,4,'1708420560.jpg','/2024/1/20/17'),(15,4,'1708420723.jpg','/2024/1/20/17'),(16,4,'1708420768.jpg','/2024/1/20/17'),(17,4,'1708421627.jpg','/2024/1/20/17');
 
 /*Table structure for table `isfollow` */
 
@@ -83,11 +83,11 @@ CREATE TABLE `post` (
   KEY `FK_publish` (`userID`),
   CONSTRAINT `FK_contain` FOREIGN KEY (`blockID`) REFERENCES `block` (`blockID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_publish` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `post` */
 
-insert  into `post`(`postID`,`userID`,`blockID`,`replyNumber`,`postTitle`,`postDate`) values (1,1,1,5,'论为什么要考研','2024-02-15 15:29:28'),(2,2,13,2,'考研真不如考公吧','2024-02-16 21:07:51'),(3,2,16,1,'今年的形式还是这么难','2024-02-16 21:15:02'),(4,1,13,0,'好想摆烂','2024-02-16 22:06:37'),(6,4,1,2,'寒假马上就要结束喽','2024-02-19 16:02:41');
+insert  into `post`(`postID`,`userID`,`blockID`,`replyNumber`,`postTitle`,`postDate`) values (1,1,1,11,'论为什么要考研','2024-02-15 15:29:28'),(2,2,13,2,'考研真不如考公吧','2024-02-16 21:07:51'),(3,2,16,1,'今年的形式还是这么难','2024-02-16 21:15:02'),(4,1,13,0,'好想摆烂','2024-02-16 22:06:37');
 
 /*Table structure for table `postreply` */
 
@@ -104,11 +104,31 @@ CREATE TABLE `postreply` (
   KEY `FK_makeup` (`postID`),
   CONSTRAINT `FK_interactToPost` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_makeup` FOREIGN KEY (`postID`) REFERENCES `post` (`postID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `postreply` */
 
-insert  into `postreply`(`postReplyID`,`userID`,`postID`,`postReplyContent`,`postReplyTime`) values (1,1,1,'因为闲的没事干','2024-02-15 15:29:28'),(2,2,1,'只能说现在还是太卷了','2024-02-15 18:22:09'),(3,2,2,'如题','2024-02-16 21:07:52'),(4,2,3,'无论是考研 考公 还是找工作 都好难','2024-02-16 21:15:02'),(5,1,4,'但是摆不得','2024-02-16 22:06:38'),(6,1,2,'评价是两个都考不上','2024-02-16 22:35:50'),(7,1,3,'加油做好自己咯~','2024-02-16 22:42:56'),(8,1,1,'今年考研就是被数学害了 QAQ','2024-02-16 22:46:10'),(9,2,2,'确实','2024-02-16 22:49:33'),(10,2,1,'嗨，还是没时间做模拟卷了，我自己问题也很大','2024-02-17 16:33:03'),(11,4,6,'也不知道能不能考上','2024-02-19 16:02:41'),(12,4,6,'考不上应该怎么办呢QAQ','2024-02-19 16:07:20');
+insert  into `postreply`(`postReplyID`,`userID`,`postID`,`postReplyContent`,`postReplyTime`) values (1,1,1,'因为闲的没事干','2024-02-15 15:29:28'),(2,2,1,'只能说现在还是太卷了','2024-02-15 18:22:09'),(3,2,2,'如题','2024-02-16 21:07:52'),(4,2,3,'无论是考研 考公 还是找工作 都好难','2024-02-16 21:15:02'),(5,1,4,'但是摆不得','2024-02-16 22:06:38'),(6,1,2,'评价是两个都考不上','2024-02-16 22:35:50'),(7,1,3,'加油做好自己咯~','2024-02-16 22:42:56'),(8,1,1,'今年考研就是被数学害了 QAQ','2024-02-16 22:46:10'),(9,2,2,'确实','2024-02-16 22:49:33'),(15,2,1,'诶嘿','2024-02-26 22:06:32');
+
+/*Table structure for table `report` */
+
+DROP TABLE IF EXISTS `report`;
+
+CREATE TABLE `report` (
+  `reportID` int NOT NULL AUTO_INCREMENT,
+  `reportContentPosition` varchar(20) NOT NULL,
+  `reportContentID` int NOT NULL,
+  `reportContent` varchar(30) NOT NULL,
+  `publishUser` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `reportReason` varchar(20) NOT NULL,
+  `reportDescription` varchar(50) DEFAULT NULL,
+  `reportUser` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`reportID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `report` */
+
+insert  into `report`(`reportID`,`reportContentPosition`,`reportContentID`,`reportContent`,`publishUser`,`reportReason`,`reportDescription`,`reportUser`) values (1,'帖子',1,'论为什么要考研','柑橘味香气','其他','你小子','我就吃个橘子'),(2,'帖子回复',2,'只能说现在还是太卷了','我就吃个橘子','政治','群众里面有坏人','走在冷风中n'),(3,'用户回复',6,'测试2','走在冷风中n','色情','虽然我不知道哪里瑟瑟了','走在冷风中n');
 
 /*Table structure for table `uploadfile` */
 
@@ -125,11 +145,11 @@ CREATE TABLE `uploadfile` (
   PRIMARY KEY (`uploadfileID`),
   KEY `userID` (`userID`),
   CONSTRAINT `uploadfile_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `uploadfile` */
 
-insert  into `uploadfile`(`uploadfileID`,`userID`,`uploadfileName`,`uploadfilePath`,`uploadfileSize`,`downloadCounts`,`uploadDate`) values (7,1,'开题报告-1708354095.zip','/2024/1/19/22','2981',16,'2024-02-19 22:48:15'),(8,1,'英语-1708356702.zip','/2024/1/19/23','9419',10,'2024-02-19 23:31:42'),(12,2,'nginx-1708404386.zip','/2024/1/20/12','1432',1,'2024-02-20 12:46:26');
+insert  into `uploadfile`(`uploadfileID`,`userID`,`uploadfileName`,`uploadfilePath`,`uploadfileSize`,`downloadCounts`,`uploadDate`) values (7,1,'开题报告-1708354095.zip','/2024/1/19/22','2981',16,'2024-02-19 22:48:15'),(8,1,'英语-1708356702.zip','/2024/1/19/23','9419',11,'2024-02-19 23:31:42'),(12,2,'nginx-1708404386.zip','/2024/1/20/12','1432',1,'2024-02-20 12:46:26');
 
 /*Table structure for table `user` */
 
@@ -151,7 +171,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`userID`,`userName`,`userLevel`,`userAvatar`,`userExperience`,`userAccount`,`userPassword`,`authority`,`isAdministrators`,`userDescription`) values (1,'柑橘味香气',1,8,25,'2625124158@qq.com','3d3f8c805febde5abf889e9a21190cb6','1,2',0,'是我最喜欢的猎宝'),(2,'我就吃个橘子',1,12,39,'2482302653@qq.com','3d3f8c805febde5abf889e9a21190cb6','1,2',0,'还吃'),(4,'走在冷风中n',1,1,0,'2323572223@qq.com','3d3f8c805febde5abf889e9a21190cb6','1,2',0,'这个人很懒，什么都没有留下');
+insert  into `user`(`userID`,`userName`,`userLevel`,`userAvatar`,`userExperience`,`userAccount`,`userPassword`,`authority`,`isAdministrators`,`userDescription`) values (1,'柑橘味香气',1,8,25,'2625124158@qq.com','3d3f8c805febde5abf889e9a21190cb6','012',1,'是我最喜欢的猎宝'),(2,'我就吃个橘子',1,12,39,'2482302653@qq.com','3d3f8c805febde5abf889e9a21190cb6','012',0,'还吃'),(4,'走在冷风中n',1,17,0,'2323572223@qq.com','3d3f8c805febde5abf889e9a21190cb6','021',0,'这个人很懒');
 
 /*Table structure for table `userreply` */
 
@@ -171,11 +191,11 @@ CREATE TABLE `userreply` (
   CONSTRAINT `FK_communicate` FOREIGN KEY (`postReplyID`) REFERENCES `postreply` (`postReplyID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_interactToUser` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_portion` FOREIGN KEY (`postID`) REFERENCES `post` (`postID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `userreply` */
 
-insert  into `userreply`(`userReplyID`,`userID`,`postID`,`postReplyID`,`userReplyContent`,`userReplyTime`) values (1,2,1,8,'今年的数学真的是不好评价','2024-02-17 09:56:56'),(2,2,4,5,'摆了！','2024-02-17 16:23:32'),(3,2,1,8,'而且408也不是个好东西','2024-02-17 16:24:33'),(4,4,6,12,'希望可以考上吧','2024-02-19 16:07:38');
+insert  into `userreply`(`userReplyID`,`userID`,`postID`,`postReplyID`,`userReplyContent`,`userReplyTime`) values (1,2,1,8,'今年的数学真的是不好评价','2024-02-17 09:56:56'),(2,2,4,5,'摆了！','2024-02-17 16:23:32'),(3,2,1,8,'而且408也不是个好东西','2024-02-17 16:24:33'),(7,4,1,8,'明天就出成绩了耶','2024-02-25 23:23:05'),(9,2,1,15,'毕设要做完了捏','2024-02-26 22:06:41');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
