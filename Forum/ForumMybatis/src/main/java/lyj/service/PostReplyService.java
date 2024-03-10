@@ -13,4 +13,8 @@ public interface PostReplyService {
     List<PostReply> getAllReplyFromPost(int postID);
 
     int insertNewPostReply(PostReply postReply);
+
+    List getNewPostReplyList(int userID);
+
+    void delNewPostHis(int userID,int postID);
 }

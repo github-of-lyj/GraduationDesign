@@ -1,5 +1,6 @@
 package lyj.service.impl;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import common.BaseResponse;
 import common.BusinessException;
 import common.ConstantUtil;
@@ -13,13 +14,18 @@ import lyj.MyTextCheck;
 import lyj.dao.UserMappper;
 import lyj.service.MailService;
 import lyj.service.UserService;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@DS("slave")
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -53,6 +59,7 @@ public class UserServiceImpl implements UserService {
 
     //实现用户注册的相关方法
     @Override
+    @DS("master")
     public int userRegister(userRegisterRequest userRegister) {
         String userName = userRegister.getUserName();
         String userAccount = userRegister.getUserAccount();
@@ -166,6 +173,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @DS("master")
     public void updateUserName(String userName, int userID) {
         //从数据库中查看是否存在重复的用户名，若存在，抛出异常
         if (userDAO.isExistSameUserName(userName) > 0)
@@ -182,6 +190,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @DS("master")
     public void updateUserDescription(String userDescription, int userID) {
         //检查用户修改后的用户简介是否违规
         BaseResponse baseResponse = MyTextCheck.checkText(userDescription);
@@ -195,6 +204,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @DS("master")
     public void updateUserAvatar(int userID, int fileID) {
         userDAO.updateUserAvatar(userID,fileID);
     }

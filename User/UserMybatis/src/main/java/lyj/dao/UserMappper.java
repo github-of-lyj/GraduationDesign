@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMappper {
+
     int isExistSameUserName(@Param("userName")String userName);
 
     int isExistSameUserAccount(@Param("userAccount")String userAccount);

@@ -1,11 +1,14 @@
 package lyj.service.impl;
 
+import common.SearchJudgeUtil;
 import entities.PostReplySearch;
+import entities.PostSearch;
 import lyj.dao.PostReplySearchMapper;
 import lyj.service.PostReplySearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,7 +18,13 @@ public class PostReplySearchServiceImpl implements PostReplySearchService {
 
     @Override
     public List<PostReplySearch> selectVaguePostReply(String searchField) {
-        return postReplySearchDAO.selectVaguePostReply(searchField);
+        List<PostReplySearch> postReplySearches = postReplySearchDAO.selectVaguePostReply("");
+        List<PostReplySearch> result = new ArrayList<>();
+        for (PostReplySearch postReplySearch : postReplySearches) {
+            if (SearchJudgeUtil.isContain(searchField,postReplySearch.getPostReplyContent()))
+                result.add(postReplySearch);
+        }
+        return result;
     }
 
     @Override

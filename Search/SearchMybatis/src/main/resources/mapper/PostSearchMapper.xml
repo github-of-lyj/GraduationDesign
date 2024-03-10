@@ -8,7 +8,7 @@
         FROM post
         JOIN postreply ON post.`postID` = postreply.`postID`
         JOIN block ON post.`blockID` = block.`blockID`
-        JOIN USER ON post.`userID` = user.`userID`
+        JOIN user ON post.`userID` = user.`userID`
         WHERE postTitle LIKE '%${searchField}%'
         AND postreply.postReplyTime = (
             SELECT MIN(postReplyTime)
@@ -22,7 +22,7 @@
         FROM post
         JOIN postreply ON post.`postID` = postreply.`postID`
         JOIN block ON post.`blockID` = block.`blockID`
-        JOIN USER ON post.`userID` = user.`userID`
+        JOIN user ON post.`userID` = user.`userID`
         AND postreply.postReplyTime = (
             SELECT MIN(postReplyTime)
             FROM postreply
@@ -37,7 +37,7 @@
         FROM post
         JOIN postreply ON post.`postID` = postreply.`postID`
         JOIN block ON post.`blockID` = block.`blockID`
-        JOIN USER ON post.`userID` = user.`userID`
+        JOIN user ON post.`userID` = user.`userID`
         WHERE post.`userID` = ${userID}
         AND postreply.postReplyTime = (
             SELECT MIN(postReplyTime)

@@ -5,13 +5,13 @@
 <mapper namespace="lyj.dao.UserSearchMapper">
     <select id="selectVagueUser" resultType="entities.User">
         SELECT userID,userName,userLevel
-             ,userAvatar FROM USER WHERE
+             ,userAvatar FROM user WHERE
         userName LIKE '%${searchField}%'
     </select>
 
     <select id="selectUser" resultType="entities.User">
         SELECT userName,userAvatar,userExperience,userDescription
-        FROM USER
+        FROM user
         WHERE userID = ${userID}
     </select>
 </mapper>

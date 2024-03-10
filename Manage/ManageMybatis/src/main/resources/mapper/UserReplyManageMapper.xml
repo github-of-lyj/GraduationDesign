@@ -7,7 +7,7 @@
         SELECT userReplyID,userReplyContent,userreply.`postReplyID`,postReplyContent,userName,userReplyTime
         FROM userreply
                  JOIN postreply ON userreply.`postReplyID` = postreply.`postReplyID`
-                 JOIN USER ON userreply.`userID` = user.`userID`
+                 JOIN user ON userreply.`userID` = user.`userID`
         <if test="searchField != 'all'">
             where userReplyContent like '%${searchField}%'
         </if>

@@ -32,4 +32,14 @@ public class postReplyController {
     public int insertNewPostReply(@RequestBody PostReply postReply){
         return postReplyDAO.insertNewPostReply(postReply);
     }
+
+    @GetMapping("/getNewPostReplyList/{userID}")
+    public List getNewPostReplyList(@PathVariable("userID") int userID){
+        return postReplyDAO.getNewPostReplyList(userID);
+    }
+
+    @PostMapping ("/delNewPostHis/{userID}/{postID}")
+    public void delNewPostHis(@PathVariable("userID")int userID,@PathVariable("postID") int postID){
+        postReplyDAO.delNewPostHis(userID,postID);
+    }
 }

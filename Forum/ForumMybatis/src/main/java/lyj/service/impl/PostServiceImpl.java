@@ -1,6 +1,7 @@
 package lyj.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import common.BaseResponse;
 import common.BusinessException;
 import common.ErrorCode;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@DS("master")
 public class PostServiceImpl implements PostService {
     @Autowired
     PostMapper postDAO;
@@ -23,16 +25,19 @@ public class PostServiceImpl implements PostService {
     AuthorityMapper authorityDAO;
 
     @Override
+    @DS("slave")
     public List<Post> selectPostsByBlockID(int blockID) {
         return postDAO.selectPostsByBlockID(blockID);
     }
 
     @Override
+    @DS("slave")
     public Post selectPostByPostID(int postID) {
         return postDAO.selectPostByPostID(postID);
     }
 
     @Override
+    @DS("slave")
     public int selectPostNumberByUserName(String userName) {
         return postDAO.selectPostNumberByUserName(userName);
     }

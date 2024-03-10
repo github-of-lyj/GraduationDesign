@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostReply {
+public class PostReply implements Serializable {
     private int postReplyID;
     //用户ID以及用户姓名
     private int userID;

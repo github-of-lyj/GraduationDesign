@@ -6,7 +6,7 @@
     <select id="selectVagueUploadFile" resultType="entities.UploadFile">
         SELECT uploadfileID,uploadfileName,uploadfilePath,uploadfileSize,downloadCounts,uploadfile.`userID`,userName,uploadDate
         FROM uploadfile
-        JOIN USER ON uploadfile.`userID` = user.`userID`
+        JOIN user ON uploadfile.`userID` = user.`userID`
         where uploadfileName like '%${searchField}%'
     </select>
 </mapper>

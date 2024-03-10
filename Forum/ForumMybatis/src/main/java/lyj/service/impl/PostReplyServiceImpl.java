@@ -2,6 +2,7 @@ package lyj.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import common.BaseResponse;
 import common.BusinessException;
 import common.ErrorCode;
@@ -10,12 +11,14 @@ import lyj.MyTextCheck;
 import lyj.dao.AuthorityMapper;
 import lyj.dao.PostReplyMapper;
 import lyj.service.PostReplyService;
+import lyj.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@DS("master")
 public class PostReplyServiceImpl implements PostReplyService {
     @Autowired
     PostReplyMapper PostReplyDAO;
@@ -23,17 +26,23 @@ public class PostReplyServiceImpl implements PostReplyService {
     @Autowired
     AuthorityMapper authorityDAO;
 
+    @Autowired
+    RedisUtil redisUtil;
+
     @Override
+    @DS("slave")
     public PostReply getEarliestPostReplyFromPost(int postID) {
         return PostReplyDAO.getEarliestPostReplyFromPost(postID);
     }
 
     @Override
+    @DS("slave")
     public PostReply getLatestPostReplyFromPost(int postID) {
         return PostReplyDAO.getLatestPostReplyFromPost(postID);
     }
 
     @Override
+    @DS("slave")
     public List<PostReply> getAllReplyFromPost(int postID) {
         return PostReplyDAO.getAllReplyFromPost(postID);
     }
@@ -56,6 +65,17 @@ public class PostReplyServiceImpl implements PostReplyService {
         postReply.setPostReplyTime(postReplyTime);
         PostReplyDAO.insertNewPostReply(postReply);
         PostReplyDAO.addPostReplyNumber(postReply.getPostID());
+        redisUtil.setPostReply(postReply);
         return postReply.getPostReplyID();
+    }
+
+    @Override
+    public List getNewPostReplyList(int userID) {
+        return redisUtil.getNewLatestPostReplyList(userID);
+    }
+
+    @Override
+    public void delNewPostHis(int userID, int postID) {
+        redisUtil.delPostReply(userID,postID);
     }
 }

@@ -1,6 +1,7 @@
 package lyj.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import common.BaseResponse;
 import common.BusinessException;
 import common.ErrorCode;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@DS("master")
 public class UserReplyServiceImpl implements UserReplyService {
     @Autowired
     UserReplyMapper UserReplyDAO;
@@ -27,11 +29,13 @@ public class UserReplyServiceImpl implements UserReplyService {
     AuthorityMapper authorityDAO;
 
     @Override
+    @DS("slave")
     public int selectUserReplyCount(int postReplyID) {
         return UserReplyDAO.selectUserReplyCount(postReplyID);
     }
 
     @Override
+    @DS("slave")
     public List<UserReply> selectAllUserReply(int postReplyID) {
         return UserReplyDAO.selectAllUserReply(postReplyID);
     }

@@ -1,5 +1,6 @@
 package lyj.service.impl;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import entities.Report;
 import lyj.dao.ReportMapper;
 import lyj.service.ReportService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@DS("master")
 public class ReportServiceImpl implements ReportService {
     @Autowired
     ReportMapper reportDAO;
@@ -20,6 +22,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
+    @DS("slave")
     public List<Report> selectReport(String searchField) {
         return reportDAO.selectReport(searchField);
     }

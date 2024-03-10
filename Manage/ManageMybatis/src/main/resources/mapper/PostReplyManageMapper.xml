@@ -6,7 +6,7 @@
     <select id="selectPostReply" resultType="entities.PostReply">
         SELECT postReplyID,postReplyContent,postTitle,userName,postReplyTime
         FROM postreply
-        JOIN USER ON postreply.`userID` = user.`userID`
+        JOIN user ON postreply.`userID` = user.`userID`
         JOIN post ON postreply.`postID` = post.`postID`
         <if test="searchField != 'all'">
             where postReplyContent like '%${searchField}%'

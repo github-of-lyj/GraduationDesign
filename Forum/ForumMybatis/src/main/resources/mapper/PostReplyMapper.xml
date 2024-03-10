@@ -5,7 +5,7 @@
 <mapper namespace="lyj.dao.PostReplyMapper">
     <select id="getEarliestPostReplyFromPost" resultType="entities.PostReply">
         SELECT postReplyID,postreply.`userID`,userName,postTitle,postReplyContent,postReplyTime FROM postreply
-        JOIN USER ON postreply.`userID` = user.`userID`
+        JOIN user ON postreply.`userID` = user.`userID`
         JOIN post ON postreply.`postID` = post.`postID`
         WHERE postreply.`postID` = ${postID}
         ORDER BY postReplyTime
@@ -14,7 +14,7 @@
 
     <select id="getLatestPostReplyFromPost" resultType="entities.PostReply">
         SELECT postReplyID,postreply.`userID`,userName,postTitle,postReplyContent,postReplyTime FROM postreply
-        JOIN USER ON postreply.`userID` = user.`userID`
+        JOIN user ON postreply.`userID` = user.`userID`
         JOIN post ON postreply.`postID` = post.`postID`
         WHERE postreply.`postID` = ${postID}
         ORDER BY postReplyTime desc
@@ -23,7 +23,7 @@
 
     <select id="getAllReplyFromPost" resultType="entities.PostReply">
         SELECT postReplyID,userName,postTitle,postReplyContent,postReplyTime FROM postreply
-        JOIN USER ON postreply.`userID` = user.`userID`
+        JOIN user ON postreply.`userID` = user.`userID`
         JOIN post ON postreply.`postID` = post.`postID`
         WHERE postreply.`postID` = ${postID}
         ORDER BY postReplyTime

@@ -16,6 +16,26 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>lyj.ForumMybatisMain</mainClass> <!-- 指定 Spring Boot 应用程序的主类 -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal> <!-- 指定打包目标为重新打包 -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
     <dependencies>
         <!-- nacos注册中心 -->
         <dependency>
@@ -38,6 +58,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--连接使用mysql的一系列依赖，例如 druid 连接池 -->
+        <!-- 配置多数据源 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+            <version>4.2.0</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -49,6 +75,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!-- mybatis -->
         <dependency>
@@ -82,5 +113,7 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+
 
 </project>

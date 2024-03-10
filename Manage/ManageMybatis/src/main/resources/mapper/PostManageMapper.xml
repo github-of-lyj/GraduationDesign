@@ -5,7 +5,7 @@
 <mapper namespace="lyj.dao.PostManageMapper">
     <select id="selectPost" resultType="entities.Post">
         SELECT postID,postTitle,blockName,replyNumber,userName,postDate FROM post
-        JOIN USER ON post.`userID` = user.`userID`
+        JOIN user ON post.`userID` = user.`userID`
         JOIN block ON post.`blockID` = block.`blockID`
         <if test="searchField != 'all'">
             where postTitle like '%${searchField}%'

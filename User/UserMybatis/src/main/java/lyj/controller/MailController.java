@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/mail")
+@RequestMapping("/user/mail")
 public class MailController {
     @Autowired
     MailService mailService;

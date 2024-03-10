@@ -2,6 +2,7 @@ package lyj.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import common.ConstantUtil;
 import entities.MyFile;
 import lyj.dao.FileMapper;
@@ -21,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
+@DS("master")
 public class FileServiceImpl implements FileService {
     @Autowired
     FileMapper fileDao;
@@ -29,6 +31,7 @@ public class FileServiceImpl implements FileService {
 
 
     @Override
+    @DS("slave")
     public ResponseEntity<Resource> getUserAvatar(String fileID) throws IOException {
         MyFile myFile = fileDao.getFilePath(fileID);
         String fileName = myFile.getFileName();
@@ -85,7 +88,6 @@ public class FileServiceImpl implements FileService {
             myFile.setFilePath(imgUrl);
             myFile.setUserID(userID);
             fileDao.uploadUserAvatar(myFile);
-            System.out.println(myFile.getFileID());
             return myFile.getFileID();
         } catch (IOException e) {
             e.printStackTrace();

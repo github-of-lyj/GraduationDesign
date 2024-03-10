@@ -32,4 +32,14 @@ public class PostReplyController {
     Object insertNewPostReply(@RequestBody PostReply publishData){
         return forumService.insertNewPostReply(publishData);
     }
+
+    @GetMapping("/getNewPostReplyList/{userID}")
+    List getNewPostReplyList(@PathVariable("userID") int userID){
+        return forumService.getNewPostReplyList(userID);
+    }
+
+    @PostMapping ("/delNewPostHis/{userID}/{postID}")
+    void delNewPostHis(@PathVariable("userID")int userID,@PathVariable("postID") int postID){
+        forumService.delNewPostHis(userID,postID);
+    }
 }

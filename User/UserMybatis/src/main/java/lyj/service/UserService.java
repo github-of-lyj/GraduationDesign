@@ -5,6 +5,7 @@ import entities.request.User.userLoginRequest;
 import entities.request.User.userRegisterRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.SqlSession;
 
 public interface UserService {
     int userRegister(userRegisterRequest userRegister);

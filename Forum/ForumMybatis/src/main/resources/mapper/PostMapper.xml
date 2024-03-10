@@ -5,14 +5,14 @@
 <mapper namespace="lyj.dao.PostMapper">
     <select id="selectPostsByBlockID" resultType="entities.Post">
         SELECT postID,userName,blockName,replyNumber,postTitle,postDate FROM post
-        JOIN USER ON post.`userID` = user.`userID`
+        JOIN user ON post.`userID` = user.`userID`
         JOIN block ON post.`blockID` = block.`blockID`
         where post.`blockID` = ${blockID}
     </select>
 
     <select id="selectPostByPostID" resultType="entities.Post">
-        SELECT postID,userName,blockName,replyNumber,postTitle,postDate FROM post
-        JOIN USER ON post.`userID` = user.`userID`
+        SELECT postID,userName,blockName,replyNumber,postTitle,postDate,post.`userID` FROM post
+        JOIN user ON post.`userID` = user.`userID`
         JOIN block ON post.`blockID` = block.`blockID`
         WHERE post.`postID` = ${postID}
 

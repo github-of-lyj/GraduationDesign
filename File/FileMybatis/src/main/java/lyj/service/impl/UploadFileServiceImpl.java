@@ -2,6 +2,7 @@ package lyj.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import common.ConstantUtil;
 import entities.UploadFile;
 import lyj.dao.UploadFileMapper;
@@ -22,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
+@DS("master")
 public class UploadFileServiceImpl implements UploadFileService {
 
     @Autowired
@@ -31,6 +33,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 
 
     @Override
+    @DS("slave")
     public List<UploadFile> selectAllUploadFile() {
         return uploadFileDAO.selectAllUploadFile();
     }
@@ -83,6 +86,7 @@ public class UploadFileServiceImpl implements UploadFileService {
         String encodedFileName = URLEncoder.encode(uploadFileName, StandardCharsets.UTF_8);
 
         File file = new File(ConstantUtil.FILE_PREFIX + zipPrefix + uploadFilePath + '/' + uploadFileName);
+
         FileSystemResource resource = new FileSystemResource(file);
 
         if (!resource.exists()) {

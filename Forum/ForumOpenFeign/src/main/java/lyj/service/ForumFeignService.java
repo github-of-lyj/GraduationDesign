@@ -46,6 +46,11 @@ public interface ForumFeignService {
     @PostMapping("/postReply/insertNewPostReply")
     Object insertNewPostReply(@RequestBody PostReply postReply);
 
+    @GetMapping("/postReply/getNewPostReplyList/{userID}")
+    List getNewPostReplyList(@PathVariable("userID") int userID);
+
+    @PostMapping ("/postReply/delNewPostHis/{userID}/{postID}")
+    void delNewPostHis(@PathVariable("userID")int userID,@PathVariable("postID") int postID);
 
     @GetMapping("/userReply/selectUserReplyCount/{postReplyID}")
     int selectUserReplyCount(@PathVariable("postReplyID") int postReplyID);
